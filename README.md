@@ -2,12 +2,15 @@
 
 A simple promisified http client library with zero deps.
 
+[![Build Status](https://travis-ci.org/panther-js/roi.svg?branch=master)](https://travis-ci.org/panther-js/roi)
+
+_Node.js 5+_
+
 * JSON.
 * Basic auth.
 * GET, POST, PUT, DELETE[soon], UPLOAD[soon].
 * 0 [zero] deps.
 
-    
 ## Usage
     roi({port:3000}).get('/posts')
     .then(x => console.log(x))
