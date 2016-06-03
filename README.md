@@ -4,7 +4,7 @@ A simple promisified http client library with zero deps.
 
 [![Build Status](https://travis-ci.org/panther-js/roi.svg?branch=master)](https://travis-ci.org/panther-js/roi)
 
-_Node.js 5+_
+_Node.js 6+_
 
 * JSON.
 * Basic auth.
