@@ -4,9 +4,9 @@
   "description": "A simple promisified http client library with zero deps.",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/*-test.js",
-    "lint": "jshint index.js lib/*.js test/*.js",
-    "coverage": "./node_modules/.bin/istanbul cover tape -- test/**.js"
+    "test": "tape test/roi-test.js",
+    "lint": "jshint index.js lib/roi.js test/roi-test.js",
+    "coverage": "./node_modules/.bin/istanbul cover tape -- test/roi-test.js"
   },
   "files": [
     "index.js",
