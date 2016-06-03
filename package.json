@@ -1,0 +1,32 @@
+{
+  "name": "roi",
+  "version": "0.1.0",
+  "description": "A simple promisified http client library with zero deps.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*-test.js",
+    "lint": "jshint index.js lib/*.js test/*.js"
+  },
+  "files": [
+    "index.js",
+    "lib",
+    "test"
+  ],
+  "keywords": [
+    "http",
+    "promises",
+    "node"
+  ],
+  "author": "helio frota",
+  "license": "MIT",
+  "devDependencies": {
+    "jshint": "^2.9.2",
+    "tape": "^4.5.1"
+  },
+  "homepage": "https://github.com/panther-js/roi#readme",
+  "repository": {
+    "type": "git",
+    "url": "panther-js/roi"
+  },
+  "bugs": "https://github.com/panther-js/roi/issues"
+}

@@ -1,0 +1,69 @@
+{
+  "posts": [
+    {
+      "title": "hail-json-server",
+      "author": "Panther-JS",
+      "id": 1
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 3
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 4
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 5
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 6
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 7
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 8
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 9
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 10
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 11
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 12
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment here.",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "Panther-JS"
+  }
+}
