@@ -3,6 +3,7 @@
 A simple promisified http client library with zero deps.
 
 [![Build Status](https://travis-ci.org/panther-js/roi.svg?branch=master)](https://travis-ci.org/panther-js/roi)
+[![Coverage Status](https://coveralls.io/repos/github/panther-js/roi/badge.svg?branch=master)](https://coveralls.io/github/panther-js/roi?branch=master)
 
 _Node.js 6+_
 

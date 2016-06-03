@@ -4,6 +4,7 @@ language: node_js
 node_js:
   - "6"
 before_script:
+   - npm install -g coveralls 
    - ./ci.sh
 script:
    - make
@@ -14,4 +15,4 @@ branches:
   only:
     - master
 after_success:
-  - coveralls
+  - cat ./coverage/lcov.info | coveralls
