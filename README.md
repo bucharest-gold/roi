@@ -7,7 +7,8 @@ A simple promisified http client library with zero deps.
 * GET, POST, PUT, DELETE[soon], UPLOAD[soon].
 * 0 [zero] deps.
 
-
+    
+## Usage
     roi({port:3000}).get('/posts')
     .then(x => console.log(x))
     .catch(e => conole.log(e));
