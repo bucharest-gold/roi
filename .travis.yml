@@ -5,14 +5,12 @@ node_js:
   - "5"
   - "6"
 before_script:
-   - npm install -g json-server
-   - json-server --watch test/fixtures/db.json
+   - ./ci.sh
 script:
    - make ci
 after_script:
-   - ./build/stop-server.sh
-notifications:
-  irc: "irc.freenode.org#brass-monkey"
+   - PIDD=`ps -x | grep "json-server" | cut -d' ' -f1 | head -n 1`
+   - kill -9 $PIDD
 branches:
   only:
     - master
