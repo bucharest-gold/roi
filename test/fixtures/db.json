@@ -8,11 +8,6 @@
     {
       "title": "foo-json-server",
       "author": "Panther-JS",
-      "id": 3
-    },
-    {
-      "title": "foo-json-server",
-      "author": "Panther-JS",
       "id": 4
     },
     {
@@ -43,17 +38,12 @@
     {
       "title": "foo-json-server",
       "author": "Panther-JS",
-      "id": 10
-    },
-    {
-      "title": "foo-json-server",
-      "author": "Panther-JS",
-      "id": 11
-    },
-    {
-      "title": "foo-json-server",
-      "author": "Panther-JS",
       "id": 12
+    },
+    {
+      "title": "foo-json-server",
+      "author": "Panther-JS",
+      "id": 13
     }
   ],
   "comments": [

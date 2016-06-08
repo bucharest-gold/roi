@@ -21,12 +21,23 @@ test('Should get.', t => {
 
 });
 
+test('Should delete.', t => {
+
+  roi.del('/posts/11')
+    .then(x => {
+      t.equal(x.statusCode, 200);
+      t.end();
+    }).catch(e => console.log(e));
+
+});
+
 test('Should post.', t => {
 
   let foo = {
     title: "foo-json-server",
     author: "Panther-JS"
   };
+
   roi.post('/posts', foo)
     .then(x => {
       t.equal(x.statusCode, 201);
@@ -41,6 +52,7 @@ test('Should put.', t => {
     title: "hail-json-server",
     author: "Panther-JS"
   };
+
   roi.put('/posts/1', foo)
     .then(x => {
       t.equal(x.statusCode, 200);
