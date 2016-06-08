@@ -23,7 +23,7 @@ test('Should get.', t => {
 
 test('Should delete.', t => {
 
-  roi.del('/posts/11')
+  roi.del('/posts/1')
     .then(x => {
       t.equal(x.statusCode, 200);
       t.end();
@@ -34,7 +34,7 @@ test('Should delete.', t => {
 test('Should post.', t => {
 
   let foo = {
-    title: "foo-json-server",
+    title: "foo-json",
     author: "Panther-JS"
   };
 
