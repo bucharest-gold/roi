@@ -15,16 +15,16 @@ _Node.js 4,5,6_
 ## Usage
     roi({port:3000}).get('/posts')
     .then(x => console.log(x))
-    .catch(e => conole.log(e));
+    .catch(e => console.log(e));
 
     roi({port:3000}).post('/posts', {foo:1, bar:'bar'})
     .then(x => console.log(x))
-    .catch(e => conole.log(e));
+    .catch(e => console.log(e));
 
     roi({port:3000}).put('/posts/123', {foo:4, bar:'bar'})
     .then(x => console.log(x))
-    .catch(e => conole.log(e));
+    .catch(e => console.log(e));
 
     roi({port:3000}).del('/posts/123')
     .then(x => console.log(x))
-    .catch(e => conole.log(e));
+    .catch(e => console.log(e));
