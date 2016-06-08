@@ -7,12 +7,12 @@ A simple promisified http client library with zero deps.
 
 _Node.js 4,5,6_
 
-* JSON.
-* Basic auth.
-* GET, POST, PUT, DELETE, UPLOAD[soon].
-* 0 [zero] deps.
+## Features:
 
-## Usage
+* Basic authentication support.
+* GET, POST, PUT, DELETE, UPLOAD[soon].
+
+## Usage:
     roi({port:3000}).get('/posts')
     .then(x => console.log(x))
     .catch(e => console.log(e));
@@ -26,5 +26,9 @@ _Node.js 4,5,6_
     .catch(e => console.log(e));
 
     roi({port:3000}).del('/posts/123')
+    .then(x => console.log(x))
+    .catch(e => console.log(e));
+
+    roi({port:3000, https:true}).get('/posts')
     .then(x => console.log(x))
     .catch(e => console.log(e));
