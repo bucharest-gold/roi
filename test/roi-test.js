@@ -12,30 +12,25 @@ test('setup', t => {
 });
 
 test('Should get.', t => {
-
   roi.get('/posts')
     .then(x => {
       t.equal(x[0].id, 1);
       t.end();
     }).catch(e => console.log(e));
-
 });
 
 test('Should delete.', t => {
-
   roi.del('/posts/1')
     .then(x => {
       t.equal(x.statusCode, 200);
       t.end();
     }).catch(e => console.log(e));
-
 });
 
 test('Should post.', t => {
-
   let foo = {
-    title: "foo-json",
-    author: "Panther-JS"
+    title: 'foo-json',
+    author: 'Panther-JS'
   };
 
   roi.post('/posts', foo)
@@ -43,14 +38,12 @@ test('Should post.', t => {
       t.equal(x.statusCode, 201);
       t.end();
     }).catch(e => console.log(e));
-
 });
 
 test('Should put.', t => {
-
   let foo = {
-    title: "hail-json-server",
-    author: "Panther-JS"
+    title: 'hail-json-server',
+    author: 'Panther-JS'
   };
 
   roi.put('/posts/1', foo)
@@ -58,10 +51,4 @@ test('Should put.', t => {
       t.equal(x.statusCode, 200);
       t.end();
     }).catch(e => console.log(e));
-
-});
-
-test('teardown', t => {
-  console.log('done.');
-  t.end();
 });
