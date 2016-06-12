@@ -1,8 +1,7 @@
-// author: helio frota.
-
 'use strict';
 
 const test = require('tape');
+const fs = require('fs');
 let roi = require('../lib/roi');
 
 test('setup', t => {
@@ -49,6 +48,20 @@ test('Should put.', t => {
   roi.put('/posts/1', foo)
     .then(x => {
       t.equal(x.statusCode, 200);
+      t.end();
+    }).catch(e => console.log(e));
+});
+
+test('Should download.', t => {
+  roi = roi({ host: 'central.maven.org' });
+  roi.download('/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar', '/tmp/aesh.jar')
+    .then(x => {
+      try {
+        fs.statSync('/tmp/aesh.jar');
+        t.equal(1, 1);
+      } catch (e) {
+        console.log(e);
+      }
       t.end();
     }).catch(e => console.log(e));
 });
