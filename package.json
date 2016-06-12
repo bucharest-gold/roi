@@ -1,6 +1,6 @@
 {
   "name": "roi",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A simple promisified http client library with zero deps.",
   "main": "index.js",
   "scripts": {
