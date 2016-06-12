@@ -32,3 +32,8 @@ _Node.js 4,5,6_
     roi({port:3000, https:true}).get('/posts')
     .then(x => console.log(x))
     .catch(e => console.log(e));
+
+    roi({ host: 'central.maven.org' })
+    .download('/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar', '/tmp/aesh.jar')
+    .then(x => console.log('Download ok!'))
+    .catch(e => console.log(e));
