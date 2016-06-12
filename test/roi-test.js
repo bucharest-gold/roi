@@ -60,7 +60,7 @@ test('Should download.', t => {
     .then(x => {
       try {
         fs.statSync('/tmp/aesh.jar');
-        t.equal(1, 1);
+        t.equal(x.statusCode, 200);
       } catch (e) {
         console.log(e);
       }
