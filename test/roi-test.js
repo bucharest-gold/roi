@@ -2,10 +2,12 @@
 
 const test = require('tape');
 const fs = require('fs');
-let roi = require('../lib/roi');
+const Roi = require('../lib/roi');
+
+let roi = null;
 
 test('setup', t => {
-  roi = roi({ port: 3000 });
+  roi = Roi({ port: 3000 });
   console.log('init.');
   t.end();
 });
@@ -53,7 +55,7 @@ test('Should put.', t => {
 });
 
 test('Should download.', t => {
-  roi = roi({ host: 'central.maven.org' });
+  roi = Roi({ host: 'central.maven.org' });
   roi.download('/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar', '/tmp/aesh.jar')
     .then(x => {
       try {
