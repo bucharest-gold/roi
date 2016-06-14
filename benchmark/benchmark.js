@@ -2,8 +2,8 @@
 
 // To run the test:
 // npm install -g json-server
-// json-server --watch ../test/fixtures/db.js
-// npm run benchmark
+// json-server --watch test/fixtures/db.json
+// another terminal run: npm run benchmark
 
 const roi = require('../index.js');
 const rp = require('request-promise');
@@ -13,7 +13,7 @@ function roiGET () {
 }
 
 function rpGET () {
-  return rp('http://localhost:3000');
+  return rp('http://localhost:3000/posts');
 }
 
 function runBenchmarks () {
