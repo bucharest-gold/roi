@@ -67,3 +67,12 @@ test('Should download.', t => {
       t.end();
     }).catch(e => console.log(e));
 });
+
+test('Should check if url exists.', t => {
+  roi = Roi({ host: 'central.maven.org' });
+  roi.exists('/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar')
+    .then(x => {
+      t.equal(x.statusCode, 200);
+      t.end();
+    }).catch(e => console.log(e));
+});

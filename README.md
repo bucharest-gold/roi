@@ -37,3 +37,12 @@ _Node.js 4,5,6_
     .download('/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar', '/tmp/aesh.jar')
     .then(x => console.log('Download ok!'))
     .catch(e => console.log(e));
+
+    roi({ host: 'central.maven.org' })
+    .exists('/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar')
+    .then(x => {
+        if (x.statusCode === 200) {
+          console.log('Yup this URL exists!')
+        }
+     })
+    .catch(e => console.log(e));
