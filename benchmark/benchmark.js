@@ -7,13 +7,31 @@
 
 const roi = require('../index.js');
 const rp = require('request-promise');
+const request = require('request');
 
 function roiGET () {
   return roi({port: 3000}).get('/posts');
 }
 
-function rpGET () {
+function requestPromiseGET () {
   return rp('http://localhost:3000/posts');
+}
+
+function requestGET () {
+  return new Promise((resolve, reject) => {
+    request.get('http://localhost:3000/posts', (error, response, body) => {
+      if (error) {
+        return reject(error);
+      }
+      if (!body) {
+        return resolve(response.statusCode);
+      }
+      if (body.errorCode) {
+        return reject(body.message);
+      }
+      return resolve(body);
+    });
+  });
 }
 
 function runBenchmarks () {
@@ -21,8 +39,11 @@ function runBenchmarks () {
     'roiGET': function (done) {
       roiGET().then(done);
     },
-    'rpGET': function (done) {
-      rpGET().then(done);
+    'requestPromiseGET': function (done) {
+      requestPromiseGET().then(done);
+    },
+    'requestGET': function (done) {
+      requestGET().then(done);
     }
   };
 

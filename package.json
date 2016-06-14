@@ -26,6 +26,7 @@
     "bench": "^0.3.6",
     "istanbul": "^0.4.3",
     "jshint": "^2.9.2",
+    "request": "^2.72.0",
     "request-promise": "^3.0.0",
     "semistandard": "^8.0.0",
     "tape": "^4.5.1"
