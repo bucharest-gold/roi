@@ -18,10 +18,10 @@ function rpGET () {
 
 function runBenchmarks () {
   exports.compare = {
-    "roiGET" : function (done) {
+    'roiGET': function (done) {
       roiGET().then(done);
     },
-    "rpGET" : function (done) {
+    'rpGET': function (done) {
       rpGET().then(done);
     }
   };
