@@ -13,6 +13,8 @@ script:
 after_script:
    - PIDD=`ps -x | grep "json-server" | cut -d' ' -f1 | head -n 1`
    - kill -9 $PIDD
+notifications:
+  irc: "irc.freenode.org#brass-monkey"
 branches:
   only:
     - master
