@@ -7,6 +7,10 @@ A simple promisified http client library with zero deps.
 
 _Node.js 4,5,6_
 
+## Contributing
+
+Please read the [contributing guide](./CONTRIBUTING.md)
+
 ## Features:
 
 * Basic authentication support.
