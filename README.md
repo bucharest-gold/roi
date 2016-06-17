@@ -2,15 +2,15 @@
 
 A simple promisified http client library with zero deps.
 
-[![Build Status](https://travis-ci.org/panther-js/roi.svg?branch=master)](https://travis-ci.org/panther-js/roi)
-[![Coverage Status](https://coveralls.io/repos/github/panther-js/roi/badge.svg?branch=master)](https://coveralls.io/github/panther-js/roi?branch=master)
+[![Build Status](https://travis-ci.org/bucharest-gold/roi.svg?branch=master)](https://travis-ci.org/bucharest-gold/roi)
+[![Coverage Status](https://coveralls.io/repos/github/bucharest-gold/roi/badge.svg?branch=master)](https://coveralls.io/github/bucharest-gold/roi?branch=master)
 
 _Node.js 4,5,6_
 
 ## Features:
 
 * Basic authentication support.
-* GET, POST, PUT, DELETE, UPLOAD[soon].
+* GET, POST, PUT, DELETE, DOWNLOAD, EXISTS, UPLOAD[soon].
 
 ## Usage:
     roi({port:3000}).get('/posts')

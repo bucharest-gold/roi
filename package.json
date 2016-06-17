@@ -20,8 +20,8 @@
     "promises",
     "node"
   ],
-  "author": "helio frota",
-  "license": "MIT",
+  "author": "Red Hat, Inc.",
+  "license": "Apache-2.0",
   "devDependencies": {
     "bench": "^0.3.6",
     "istanbul": "^0.4.3",
@@ -31,10 +31,10 @@
     "semistandard": "^8.0.0",
     "tape": "^4.5.1"
   },
-  "homepage": "https://github.com/panther-js/roi#readme",
+  "homepage": "https://github.com/bucharest-gold/roi#readme",
   "repository": {
     "type": "git",
     "url": "panther-js/roi"
   },
-  "bugs": "https://github.com/panther-js/roi/issues"
+  "bugs": "https://github.com/bucharest-gold/roi/issues"
 }
