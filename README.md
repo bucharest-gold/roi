@@ -14,7 +14,7 @@ Please read the [contributing guide](./CONTRIBUTING.md)
 ## Features:
 
 * Basic authentication support.
-* GET, POST, PUT, DELETE, DOWNLOAD, EXISTS, UPLOAD[soon].
+* GET, POST, PUT, DELETE, DOWNLOAD, EXISTS, UPLOAD.
 
 ## Usage:
     roi({port:3000}).get('/posts')
@@ -42,8 +42,25 @@ Please read the [contributing guide](./CONTRIBUTING.md)
     .then(x => console.log('Download ok!'))
     .catch(e => console.log(e));
 
+    or
+
+    roi('http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar')
+    .download('/tmp/aesh.jar')
+    .then(x => console.log('Download ok!'))
+    .catch(e => console.log(e));
+
     roi({ host: 'central.maven.org' })
     .exists('/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar')
+    .then(x => {
+        if (x.statusCode === 200) {
+          console.log('Yup this URL exists!')
+        }
+     })
+    .catch(e => console.log(e));
+
+    or
+
+    roi('http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar').exists()
     .then(x => {
         if (x.statusCode === 200) {
           console.log('Yup this URL exists!')
