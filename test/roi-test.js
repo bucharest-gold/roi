@@ -29,7 +29,7 @@ test('setup', t => {
 });
 
 test('Should get.', t => {
-  roi.get('/posts')
+  Roi('http://localhost:3000/posts').get()
     .then(x => {
       t.equal(x[0].id, 1);
       t.end();
@@ -71,8 +71,8 @@ test('Should put.', t => {
 });
 
 test('Should download.', t => {
-  roi = Roi({ host: 'central.maven.org' });
-  roi.download('/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar', '/tmp/aesh.jar')
+  Roi('http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar')
+  .download('/tmp/aesh.jar')
     .then(x => {
       try {
         fs.statSync('/tmp/aesh.jar');
@@ -85,8 +85,7 @@ test('Should download.', t => {
 });
 
 test('Should check if url exists.', t => {
-  roi = Roi({ host: 'central.maven.org' });
-  roi.exists('/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar')
+  Roi('http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar').exists()
     .then(x => {
       t.equal(x.statusCode, 200);
       t.end();
