@@ -72,7 +72,7 @@ test('Should put.', t => {
 
 test('Should download.', t => {
   Roi('http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar')
-  .download('/tmp/aesh.jar')
+    .download('/tmp/aesh.jar')
     .then(x => {
       try {
         fs.statSync('/tmp/aesh.jar');
@@ -89,5 +89,32 @@ test('Should check if url exists.', t => {
     .then(x => {
       t.equal(x.statusCode, 200);
       t.end();
+    }).catch(e => console.log(e));
+});
+
+test('Should upload.', t => {
+  const up = (request, response) => {
+    request
+      .pipe(fs.createWriteStream('/tmp/uploaded.jar'))
+      .on('finish', () => {
+        response.end(request.headers.filename);
+      });
+  };
+
+  const server = require('http').createServer(up);
+  server.listen(3001, () => {
+  });
+
+  Roi('http://localhost:3001/')
+    .upload('/tmp/aesh.jar')
+    .then(x => {
+      try {
+        fs.statSync('/tmp/uploaded.jar');
+        t.equal(1, 1);
+      } catch (e) {
+        console.log(e);
+      }
+      t.end();
+      server.close();
     }).catch(e => console.log(e));
 });
