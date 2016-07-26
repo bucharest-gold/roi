@@ -5,7 +5,7 @@ A simple promisified http client library with zero deps.
 [![Build Status](https://travis-ci.org/bucharest-gold/roi.svg?branch=master)](https://travis-ci.org/bucharest-gold/roi)
 [![Coverage Status](https://coveralls.io/repos/github/bucharest-gold/roi/badge.svg?branch=master)](https://coveralls.io/github/bucharest-gold/roi?branch=master)
 
-_Node.js 4,5,6_
+> _Node.js 4,5,6_
 
 ## Contributing
 

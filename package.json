@@ -7,8 +7,7 @@
     "test": "tape test/roi-test.js",
     "lint": "jshint index.js lib/roi.js test/roi-test.js",
     "format": "semistandard",
-    "benchmark": "node benchmark/benchmark.js",
-    "coverage": "./node_modules/.bin/istanbul cover tape -- test/roi-test.js"
+    "benchmark": "node benchmark/benchmark.js"
   },
   "files": [
     "index.js",
@@ -24,7 +23,6 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "bench": "^0.3.6",
-    "istanbul": "^0.4.3",
     "jshint": "^2.9.2",
     "request": "^2.72.0",
     "request-promise": "^3.0.0",
