@@ -25,9 +25,15 @@ const roi = require('../index');
 function createRedirectServer () {
   const server = http.createServer((request, response) => {
     if (url.parse(request.url).pathname === '/01.html') {
-      response.writeHead(301, {'content-type': 'text/html',
-      'Location': 'http://localhost:3001/02.html'});
-      response.end('Redirected from 01.');
+      if (request.method === 'POST') {
+        response.writeHead(301, {'content-type': 'text/html',
+        'Location': 'http://localhost:3000/posts'});
+        response.end('Redirected to another server.');
+      } else {
+        response.writeHead(301, {'content-type': 'text/html',
+        'Location': 'http://localhost:3001/02.html'});
+        response.end('Redirected from 01.');
+      }
     }
     if (url.parse(request.url).pathname === '/02.html') {
       response.writeHead(301, {'content-type': 'text/html',
@@ -59,32 +65,54 @@ test('Should redirect with get.', t => {
 
   roi.get(opts)
     .then(x => {
-      t.equal(1, 1);
-      t.end();
-    }).catch(e => {
+    })
+    .catch(e => {
       t.equal(e.toString(), 'Error: Maximum redirects reached.');
       t.end();
       server.close();
     });
 });
 
+test('Should post.', t => {
+  const opts = {
+    'endpoint': 'http://localhost:3000/posts'
+  };
+
+  const fooPost = {
+    title: 'foo-json',
+    author: 'bgold'
+  };
+
+  roi.post(opts, fooPost)
+    .then(x => {
+      t.equal(x.statusCode, 201);
+      t.end();
+    }).catch(e => console.log(e));
+});
+
+test('Should redirect and post.', t => {
+  const server = createRedirectServer();
+  const opts = {
+    'endpoint': 'http://localhost:3001/01.html'
+  };
+
+  const fooPost = {
+    title: 'foo-json',
+    author: 'bgold'
+  };
+
+  roi.post(opts, fooPost)
+    .then(x => {
+      t.equal(x.statusCode, 201);
+      t.end();
+      server.close();
+    }).catch(e => console.log(e));
+});
+
 // test('Should delete.', t => {
 //   roi.del('/posts/1')
 //     .then(x => {
 //       t.equal(x.statusCode, 200)
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
-
-// test('Should post.', t => {
-//   let foo = {
-//     title: 'foo-json',
-//     author: 'Panther-JS'
-//   }
-
-//   roi.post('/posts', foo)
-//     .then(x => {
-//       t.equal(x.statusCode, 201)
 //       t.end()
 //     }).catch(e => console.log(e))
 // })

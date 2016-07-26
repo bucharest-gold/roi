@@ -63,6 +63,14 @@ function extract (options) {
   return options;
 }
 
+function addDefaultHeaders (options) {
+  options.headers = {
+    'Accept': 'application/json,text/plain',
+    'Content-type': 'application/json'
+  };
+  return options;
+}
+
 function maxRedirectsReached () {
   return redirects >= maxRedirects;
 }
@@ -85,6 +93,7 @@ function validateGoodToGo (reject, response) {
 function get (options) {
   const protocol = selectProtocol(options);
   options = extract(options);
+  options = addDefaultHeaders(options);
   return new Promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
       if (goodToGo(response) && !hasRedirect(response)) {
@@ -108,6 +117,7 @@ function post (options, data) {
   options = extract(options);
   options.method = 'POST';
   const jsonData = JSON.stringify(data);
+  options = addDefaultHeaders(options);
   options.headers['Content-Length'] = jsonData.length;
   return new Promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
@@ -118,7 +128,7 @@ function post (options, data) {
         validateMaxRedirect(reject);
         validateGoodToGo(reject, response);
         options.endpoint = response.headers.location;
-        resolve(get(options));
+        resolve(post(options, data));
       }
     }).on('error', e => reject(e));
     req.write(jsonData);
