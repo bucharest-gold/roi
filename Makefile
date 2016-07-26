@@ -1,5 +1,6 @@
 test: lint
 	npm test
+	npm run coverage
 
 lint: node_modules
 	npm run lint
