@@ -153,12 +153,12 @@ test('Should redirect and put.', t => {
     }).catch(e => console.log(e));
 });
 
-test('Should delete.', t => {
+test('Should check if url exists.', t => {
   const opts = {
-    'endpoint': 'http://localhost:3000/posts/2'
+    'endpoint': 'https://github.com/bucharest-gold/roi'
   };
 
-  roi.del(opts)
+  roi.exists(opts)
     .then(x => {
       t.equal(x.statusCode, 200);
       t.end();
@@ -179,18 +179,6 @@ test('Should redirect and delete.', t => {
     }).catch(e => console.log(e));
 });
 
-test('Should check if url exists.', t => {
-  const opts = {
-    'endpoint': 'https://github.com/bucharest-gold/roi'
-  };
-
-  roi.exists(opts)
-    .then(x => {
-      t.equal(x.statusCode, 200);
-      t.end();
-    }).catch(e => console.log(e));
-});
-
 test('Should download.', t => {
   const opts = {
     'endpoint': 'http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar'
@@ -208,29 +196,30 @@ test('Should download.', t => {
     }).catch(e => console.log(e));
 });
 
-// test('Should upload.', t => {
-//   const up = (request, response) => {
-//     request
-//       .pipe(fs.createWriteStream('/tmp/uploaded.jar'))
-//       .on('finish', () => {
-//         response.end(request.headers.filename)
-//       })
-//   }
+test('Should upload.', t => {
+  const up = (request, response) => {
+    request
+      .pipe(fs.createWriteStream('/tmp/uploaded.jar'))
+      .on('finish', () => {
+        response.end(request.headers.filename);
+      });
+  };
 
-//   const server = require('http').createServer(up)
-//   server.listen(3001, () => {
-//   })
+  const server = require('http').createServer(up);
+  server.listen(3002, () => { });
 
-//   Roi('http://localhost:3001/')
-//     .upload('/tmp/aesh.jar')
-//     .then(x => {
-//       try {
-//         fs.statSync('/tmp/uploaded.jar')
-//         t.equal(1, 1)
-//       } catch (e) {
-//         console.log(e)
-//       }
-//       t.end()
-//       server.close()
-//     }).catch(e => console.log(e))
-// })
+  const opts = {
+    'endpoint': 'http://localhost:3002/'
+  };
+  roi.upload(opts, '/tmp/aesh.jar')
+    .then(x => {
+      try {
+        fs.statSync('/tmp/uploaded.jar');
+        t.equal(1, 1);
+      } catch (e) {
+        console.log(e);
+      }
+      t.end();
+      server.close();
+    }).catch(e => console.log(e));
+});

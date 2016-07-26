@@ -25,7 +25,8 @@ module.exports = exports = {
   put: put,
   del: del,
   exists: exists,
-  download: download
+  download: download,
+  upload: upload
 };
 
 const url = require('url');
@@ -227,5 +228,32 @@ function download (options, file) {
       }
     }).on('error', e => reject(e));
     req.end();
+  });
+}
+
+function upload (options, file) {
+  const protocol = selectProtocol(options);
+  options = extract(options);
+  options.method = 'POST';
+  options = addDefaultHeaders(options);
+  options.headers.filename = file;
+  return new Promise((resolve, reject) => {
+    const req = protocol.request(options, (response) => {
+      if (goodToGo(response) && !hasRedirect(response)) {
+        const body = [];
+        response.on('data', d => body.push(d));
+        response.on('end', () => resolve(body.join('')));
+      } else {
+        validateMaxRedirect(reject);
+        validateGoodToGo(reject, response);
+        options.endpoint = response.headers.location;
+        resolve(upload(options, file));
+      }
+    }).on('error', e => reject(e));
+    const stream = fs.ReadStream(file);
+    stream.pipe(req);
+    stream.on('close', (res) => {
+      req.end();
+    });
   });
 }
