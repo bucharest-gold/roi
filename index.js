@@ -22,7 +22,9 @@
 module.exports = exports = {
   get: get,
   post: post,
-  put: put
+  put: put,
+  del: del,
+  exists: exists
 };
 
 const url = require('url');
@@ -157,6 +159,47 @@ function put (options, data) {
       }
     }).on('error', e => reject(e));
     req.write(jsonData);
+    req.end();
+  });
+}
+
+function del (options) {
+  const protocol = selectProtocol(options);
+  options = extract(options);
+  options = addDefaultHeaders(options);
+  options.method = 'DELETE';
+  return new Promise((resolve, reject) => {
+    const req = protocol.request(options, (response) => {
+      if (goodToGo(response) && !hasRedirect(response)) {
+        response.on('data', d => (''));
+        response.on('end', () => resolve(response));
+      } else {
+        validateMaxRedirect(reject);
+        validateGoodToGo(reject, response);
+        options.endpoint = response.headers.location;
+        resolve(del(options));
+      }
+    }).on('error', e => reject(e));
+    req.end();
+  });
+}
+
+function exists (options) {
+  const protocol = selectProtocol(options);
+  options = extract(options);
+  options.method = 'HEAD';
+  return new Promise((resolve, reject) => {
+    const req = protocol.request(options, (response) => {
+      if (goodToGo(response) && !hasRedirect(response)) {
+        response.on('data', d => (''));
+        response.on('end', () => resolve(response));
+      } else {
+        validateMaxRedirect(reject);
+        validateGoodToGo(reject, response);
+        options.endpoint = response.headers.location;
+        resolve(exists(options));
+      }
+    }).on('error', e => reject(e));
     req.end();
   });
 }

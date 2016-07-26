@@ -33,6 +33,10 @@ function createRedirectServer () {
         response.writeHead(301, {'content-type': 'text/html',
         'Location': 'http://localhost:3000/posts/1'});
         response.end('Redirected to another server.');
+      } else if (request.method === 'DELETE') {
+        response.writeHead(301, {'content-type': 'text/html',
+        'Location': 'http://localhost:3000/posts/3'});
+        response.end('Redirected to another server.');
       } else {
         response.writeHead(301, {'content-type': 'text/html',
         'Location': 'http://localhost:3001/02.html'});
@@ -149,13 +153,43 @@ test('Should redirect and put.', t => {
     }).catch(e => console.log(e));
 });
 
-// test('Should delete.', t => {
-//   roi.del('/posts/1')
-//     .then(x => {
-//       t.equal(x.statusCode, 200)
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should delete.', t => {
+  const opts = {
+    'endpoint': 'http://localhost:3000/posts/2'
+  };
+
+  roi.del(opts)
+    .then(x => {
+      t.equal(x.statusCode, 200);
+      t.end();
+    }).catch(e => console.log(e));
+});
+
+test('Should redirect and delete.', t => {
+  const server = createRedirectServer();
+  const opts = {
+    'endpoint': 'http://localhost:3001/01.html'
+  };
+
+  roi.del(opts)
+    .then(x => {
+      t.equal(x.statusCode, 200);
+      t.end();
+      server.close();
+    }).catch(e => console.log(e));
+});
+
+test('Should check if url exists.', t => {
+  const opts = {
+    'endpoint': 'https://github.com/bucharest-gold/roi'
+  };
+
+  roi.exists(opts)
+    .then(x => {
+      t.equal(x.statusCode, 200);
+      t.end();
+    }).catch(e => console.log(e));
+});
 
 // test('Should download.', t => {
 //   Roi('http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar')
@@ -167,14 +201,6 @@ test('Should redirect and put.', t => {
 //       } catch (e) {
 //         console.log(e)
 //       }
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
-
-// test('Should check if url exists.', t => {
-//   Roi('http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar').exists()
-//     .then(x => {
-//       t.equal(x.statusCode, 200)
 //       t.end()
 //     }).catch(e => console.log(e))
 // })
