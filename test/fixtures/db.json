@@ -2,12 +2,12 @@
   "posts": [
     {
       "title": "hail-json-server",
-      "author": "Panther-JS",
+      "author": "bucharest gold",
       "id": 1
     }
   ],
   "comments": [],
   "profile": {
-    "name": "pantherjs"
+    "name": "bgold"
   }
 }
