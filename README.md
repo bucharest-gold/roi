@@ -25,12 +25,12 @@ Please read the [contributing guide](./CONTRIBUTING.md)
       'endpoint': 'http://localhost:3000/posts'
     };
 
-    const fooPost = {
+    const foo = {
       title: 'foo-json',
       author: 'bgold'
     };
 
-    roi.post(options, fooPost)
+    roi.post(options, foo)
     .then(x => console.log(x))
     .catch(e => console.log(e));
 
@@ -39,11 +39,38 @@ Please read the [contributing guide](./CONTRIBUTING.md)
       'endpoint': 'http://localhost:3000/posts/2'
     };
 
-    const fooPut = {
+    const foo = {
       title: 'foo-json2',
       author: 'bgold'
     };
 
-    roi.put(options, fooPut)
+    roi.put(options, foo)
+    .then(x => console.log(x))
+    .catch(e => console.log(e));
+
+    -- DELETE:
+    const options = {
+      'endpoint': 'http://localhost:3000/posts/3'
+    };
+
+    roi.del(options)
+    .then(x => console.log(x))
+    .catch(e => console.log(e));
+
+    -- EXISTS:
+    const options = {
+      'endpoint': 'http://localhost:3000/posts/3'
+    };
+
+    roi.exists(options)
+    .then(x => console.log(x.statusCode === 200))
+    .catch(e => console.log(e));
+
+    -- DOWNLOAD:
+    const opts = {
+      'endpoint': 'http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar'
+    };
+
+    roi.download(opts, '/tmp/aesh.jar')
     .then(x => console.log(x))
     .catch(e => console.log(e));
