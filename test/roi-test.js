@@ -29,6 +29,10 @@ function createRedirectServer () {
         response.writeHead(301, {'content-type': 'text/html',
         'Location': 'http://localhost:3000/posts'});
         response.end('Redirected to another server.');
+      } else if (request.method === 'PUT') {
+        response.writeHead(301, {'content-type': 'text/html',
+        'Location': 'http://localhost:3000/posts/1'});
+        response.end('Redirected to another server.');
       } else {
         response.writeHead(301, {'content-type': 'text/html',
         'Location': 'http://localhost:3001/02.html'});
@@ -78,12 +82,12 @@ test('Should post.', t => {
     'endpoint': 'http://localhost:3000/posts'
   };
 
-  const fooPost = {
+  const foo = {
     title: 'foo-json',
     author: 'bgold'
   };
 
-  roi.post(opts, fooPost)
+  roi.post(opts, foo)
     .then(x => {
       t.equal(x.statusCode, 201);
       t.end();
@@ -96,12 +100,48 @@ test('Should redirect and post.', t => {
     'endpoint': 'http://localhost:3001/01.html'
   };
 
-  const fooPost = {
+  const foo = {
     title: 'foo-json',
     author: 'bgold'
   };
 
-  roi.post(opts, fooPost)
+  roi.post(opts, foo)
+    .then(x => {
+      t.equal(x.statusCode, 201);
+      t.end();
+      server.close();
+    }).catch(e => console.log(e));
+});
+
+test('Should put.', t => {
+  const opts = {
+    'endpoint': 'http://localhost:3000/posts/1'
+  };
+
+  const foo = {
+    title: 'foo-json2',
+    author: 'bgold'
+  };
+
+  roi.put(opts, foo)
+    .then(x => {
+      t.equal(x.statusCode, 200);
+      t.end();
+    }).catch(e => console.log(e));
+});
+
+test('Should redirect and put.', t => {
+  const server = createRedirectServer();
+  const opts = {
+    'endpoint': 'http://localhost:3001/01.html'
+  };
+
+  const foo = {
+    title: 'foo-json',
+    author: 'bgold'
+  };
+
+  roi.post(opts, foo)
     .then(x => {
       t.equal(x.statusCode, 201);
       t.end();
@@ -111,19 +151,6 @@ test('Should redirect and post.', t => {
 
 // test('Should delete.', t => {
 //   roi.del('/posts/1')
-//     .then(x => {
-//       t.equal(x.statusCode, 200)
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
-
-// test('Should put.', t => {
-//   let foo = {
-//     title: 'hail-json-server',
-//     author: 'Panther-JS'
-//   }
-
-//   roi.put('/posts/1', foo)
 //     .then(x => {
 //       t.equal(x.statusCode, 200)
 //       t.end()

@@ -1,9 +1,24 @@
 {
   "posts": [
     {
-      "title": "hail-json-server",
-      "author": "bucharest gold",
+      "title": "foo-json2",
+      "author": "bgold",
       "id": 1
+    },
+    {
+      "title": "foo-json",
+      "author": "bgold",
+      "id": 2
+    },
+    {
+      "title": "foo-json",
+      "author": "bgold",
+      "id": 3
+    },
+    {
+      "title": "foo-json",
+      "author": "bgold",
+      "id": 4
     }
   ],
   "comments": [],

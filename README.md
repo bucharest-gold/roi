@@ -33,3 +33,17 @@ Please read the [contributing guide](./CONTRIBUTING.md)
     roi.post(options, fooPost)
     .then(x => console.log(x))
     .catch(e => console.log(e));
+
+    -- PUT:
+    const options = {
+      'endpoint': 'http://localhost:3000/posts/2'
+    };
+
+    const fooPut = {
+      title: 'foo-json2',
+      author: 'bgold'
+    };
+
+    roi.put(options, fooPut)
+    .then(x => console.log(x))
+    .catch(e => console.log(e));

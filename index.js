@@ -21,7 +21,8 @@
  */
 module.exports = exports = {
   get: get,
-  post: post
+  post: post,
+  put: put
 };
 
 const url = require('url');
@@ -129,6 +130,30 @@ function post (options, data) {
         validateGoodToGo(reject, response);
         options.endpoint = response.headers.location;
         resolve(post(options, data));
+      }
+    }).on('error', e => reject(e));
+    req.write(jsonData);
+    req.end();
+  });
+}
+
+function put (options, data) {
+  const protocol = selectProtocol(options);
+  options = extract(options);
+  options.method = 'PUT';
+  const jsonData = JSON.stringify(data);
+  options = addDefaultHeaders(options);
+  options.headers['Content-Length'] = jsonData.length;
+  return new Promise((resolve, reject) => {
+    const req = protocol.request(options, (response) => {
+      if (goodToGo(response) && !hasRedirect(response)) {
+        response.on('data', () => (''));
+        response.on('end', () => resolve(response));
+      } else {
+        validateMaxRedirect(reject);
+        validateGoodToGo(reject, response);
+        options.endpoint = response.headers.location;
+        resolve(put(options, data));
       }
     }).on('error', e => reject(e));
     req.write(jsonData);
