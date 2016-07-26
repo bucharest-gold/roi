@@ -69,10 +69,18 @@ function extract (options) {
   return options;
 }
 
+function auth (options) {
+  if (options.username) {
+    return 'Basic ' + new Buffer(options.username + ':' + options.password).toString('base64');
+  }
+  return '';
+}
+
 function addDefaultHeaders (options) {
   options.headers = {
     'Accept': 'application/json,text/plain',
-    'Content-type': 'application/json'
+    'Content-type': 'application/json',
+    'Authorization': auth(options)
   };
   return options;
 }

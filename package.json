@@ -5,19 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "tape test/roi-test.js",
-    "lint": "jshint index.js lib/roi.js test/roi-test.js",
+    "lint": "jshint index.js test/roi-test.js",
     "format": "semistandard",
     "benchmark": "node benchmark/benchmark.js"
   },
   "files": [
     "index.js",
-    "lib",
     "test"
   ],
   "keywords": [
     "http",
     "promises",
-    "node"
+    "node",
+    "requests"
   ],
   "author": "Red Hat, Inc.",
   "license": "Apache-2.0",
