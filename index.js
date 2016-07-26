@@ -24,11 +24,13 @@ module.exports = exports = {
   post: post,
   put: put,
   del: del,
-  exists: exists
+  exists: exists,
+  download: download
 };
 
 const url = require('url');
 const http = require('http');
+const fs = require('fs');
 const https = require('https');
 
 const maxRedirects = 3;
@@ -198,6 +200,30 @@ function exists (options) {
         validateGoodToGo(reject, response);
         options.endpoint = response.headers.location;
         resolve(exists(options));
+      }
+    }).on('error', e => reject(e));
+    req.end();
+  });
+}
+
+function download (options, file) {
+  const protocol = selectProtocol(options);
+  options = extract(options);
+  options = addDefaultHeaders(options);
+  return new Promise((resolve, reject) => {
+    const stream = fs.createWriteStream(file);
+    const req = protocol.request(options, (response) => {
+      if (goodToGo(response) && !hasRedirect(response)) {
+        response.pipe(stream);
+        stream.on('finish', () => {
+          resolve(response);
+          stream.close();
+        });
+      } else {
+        validateMaxRedirect(reject);
+        validateGoodToGo(reject, response);
+        options.endpoint = response.headers.location;
+        resolve(download(options, file));
       }
     }).on('error', e => reject(e));
     req.end();

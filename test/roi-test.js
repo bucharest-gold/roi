@@ -19,7 +19,7 @@
 const test = require('tape');
 const http = require('http');
 const url = require('url');
-// const fs = require('fs')
+const fs = require('fs');
 const roi = require('../index');
 
 function createRedirectServer () {
@@ -191,19 +191,22 @@ test('Should check if url exists.', t => {
     }).catch(e => console.log(e));
 });
 
-// test('Should download.', t => {
-//   Roi('http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar')
-//     .download('/tmp/aesh.jar')
-//     .then(x => {
-//       try {
-//         fs.statSync('/tmp/aesh.jar')
-//         t.equal(x.statusCode, 200)
-//       } catch (e) {
-//         console.log(e)
-//       }
-//       t.end()
-//     }).catch(e => console.log(e))
-// })
+test('Should download.', t => {
+  const opts = {
+    'endpoint': 'http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar'
+  };
+
+  roi.download(opts, '/tmp/aesh.jar')
+    .then(x => {
+      try {
+        fs.statSync('/tmp/aesh.jar');
+        t.equal(x.statusCode, 200);
+      } catch (e) {
+        console.log(e);
+      }
+      t.end();
+    }).catch(e => console.log(e));
+});
 
 // test('Should upload.', t => {
 //   const up = (request, response) => {
