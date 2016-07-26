@@ -10,7 +10,10 @@ const rp = require('request-promise');
 const request = require('request');
 
 function roiGET () {
-  return roi({port: 3000}).get('/posts');
+  const opts = {
+    'endpoint': 'http://localhost:3000/posts'
+  };
+  return roi.get(opts);
 }
 
 function requestPromiseGET () {
