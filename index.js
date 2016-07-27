@@ -100,7 +100,7 @@ function validateMaxRedirect (reject) {
 
 function validateGoodToGo (reject, response) {
   if (!goodToGo(response)) {
-    return reject(new Error(`[${response.statusCode}] - ${response.statusMessage}`));
+    throw new Error(`[${response.statusCode}] - ${response.statusMessage}`);
   }
 }
 
