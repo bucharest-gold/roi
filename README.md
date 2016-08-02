@@ -11,6 +11,17 @@ A simple promisified http client library with zero deps.
 Please read the [contributing guide](./CONTRIBUTING.md)
 
 ## Usage:
+
+    -- General example:
+    roi.get(options)
+    .then(x => {
+       console.log(x.statusCode);
+       console.log(x.headers);
+       console.log(x.body);
+       console.log(JSON.parse(x.body).foo);
+     })
+    .catch(e => console.log(e));
+
     -- GET:
     const options = {
       'endpoint': 'http://localhost:3000/posts'

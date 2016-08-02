@@ -49,7 +49,7 @@ function createRedirectServer () {
       response.end('Redirected from 02.');
     }
   });
-  return server.listen(3001);
+  return server.listen(3001, 'localhost');
 }
 
 test('Should get.', t => {
@@ -59,8 +59,11 @@ test('Should get.', t => {
 
   roi.get(opts)
     .then(x => {
-      const result = JSON.parse(x);
+      t.equal(x.statusCode, 200);
+      t.equal(x.headers['x-powered-by'], 'Express');
+      const result = JSON.parse(x.body);
       t.equal(result[0].id, 1);
+      t.equal(1, 1);
       t.end();
     }).catch(e => console.log(e));
 });
@@ -72,8 +75,7 @@ test('Should redirect with get.', t => {
   };
 
   roi.get(opts)
-    .then(x => {
-    })
+    .then(x => {})
     .catch(e => {
       t.equal(e.toString(), 'Error: Maximum redirects reached.');
       t.end();
