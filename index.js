@@ -110,18 +110,23 @@ function get (options) {
   options = addDefaultHeaders(options);
   return new Promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
+      const body = [];
+      response.setEncoding('utf8');
+      response.on('data', d => body.push(d));
       if (goodToGo(response) && !hasRedirect(response)) {
-        const body = [];
-        response.setEncoding('utf8');
-        response.on('data', d => body.push(d));
         response.on('end', () => resolve(body));
+      } else if (!goodToGo(response)) {
+        reject(body);
       } else {
         validateMaxRedirect(reject);
         validateGoodToGo(reject, response);
         options.endpoint = response.headers.location;
         resolve(get(options));
       }
-    }).on('error', e => reject(e));
+    });
+    req.on('error', (e) => {
+      console.log(`Problem with request: ${e.message}`);
+    });
     req.end();
   });
 }
@@ -135,16 +140,23 @@ function post (options, data) {
   options.headers['Content-Length'] = jsonData.length;
   return new Promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
+      const body = [];
+      response.setEncoding('utf8');
+      response.on('data', d => body.push(d));
       if (goodToGo(response) && !hasRedirect(response)) {
-        response.on('data', () => (''));
         response.on('end', () => resolve(response));
+      } else if (!goodToGo(response)) {
+        reject(body);
       } else {
         validateMaxRedirect(reject);
         validateGoodToGo(reject, response);
         options.endpoint = response.headers.location;
         resolve(post(options, data));
       }
-    }).on('error', e => reject(e));
+    });
+    req.on('error', (e) => {
+      console.log(`Problem with request: ${e.message}`);
+    });
     req.write(jsonData);
     req.end();
   });
@@ -159,16 +171,23 @@ function put (options, data) {
   options.headers['Content-Length'] = jsonData.length;
   return new Promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
+      const body = [];
+      response.setEncoding('utf8');
+      response.on('data', d => body.push(d));
       if (goodToGo(response) && !hasRedirect(response)) {
-        response.on('data', () => (''));
         response.on('end', () => resolve(response));
+      } else if (!goodToGo(response)) {
+        reject(body);
       } else {
         validateMaxRedirect(reject);
-        validateGoodToGo(reject, response);
+        validateGoodToGo(reject, response, body);
         options.endpoint = response.headers.location;
         resolve(put(options, data));
       }
-    }).on('error', e => reject(e));
+    });
+    req.on('error', (e) => {
+      console.log(`Problem with request: ${e.message}`);
+    });
     req.write(jsonData);
     req.end();
   });
@@ -181,16 +200,23 @@ function del (options) {
   options.method = 'DELETE';
   return new Promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
+      const body = [];
+      response.setEncoding('utf8');
+      response.on('data', d => body.push(d));
       if (goodToGo(response) && !hasRedirect(response)) {
-        response.on('data', d => (''));
         response.on('end', () => resolve(response));
+      } else if (!goodToGo(response)) {
+        reject(body);
       } else {
         validateMaxRedirect(reject);
         validateGoodToGo(reject, response);
         options.endpoint = response.headers.location;
         resolve(del(options));
       }
-    }).on('error', e => reject(e));
+    });
+    req.on('error', (e) => {
+      console.log(`Problem with request: ${e.message}`);
+    });
     req.end();
   });
 }
@@ -201,16 +227,23 @@ function exists (options) {
   options.method = 'HEAD';
   return new Promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
+      const body = [];
+      response.setEncoding('utf8');
+      response.on('data', d => body.push(d));
       if (goodToGo(response) && !hasRedirect(response)) {
-        response.on('data', d => (''));
         response.on('end', () => resolve(response));
+      } else if (!goodToGo(response)) {
+        reject(body);
       } else {
         validateMaxRedirect(reject);
         validateGoodToGo(reject, response);
         options.endpoint = response.headers.location;
         resolve(exists(options));
       }
-    }).on('error', e => reject(e));
+    });
+    req.on('error', (e) => {
+      console.log(`Problem with request: ${e.message}`);
+    });
     req.end();
   });
 }
@@ -222,6 +255,9 @@ function download (options, file) {
   return new Promise((resolve, reject) => {
     const stream = fs.createWriteStream(file);
     const req = protocol.request(options, (response) => {
+      // const body = []
+      // response.setEncoding('utf8')
+      // response.on('data', d => body.push(d))
       if (goodToGo(response) && !hasRedirect(response)) {
         response.pipe(stream);
         stream.on('finish', () => {
@@ -234,7 +270,10 @@ function download (options, file) {
         options.endpoint = response.headers.location;
         resolve(download(options, file));
       }
-    }).on('error', e => reject(e));
+    });
+    req.on('error', (e) => {
+      console.log(`Problem with request: ${e.message}`);
+    });
     req.end();
   });
 }
@@ -247,17 +286,23 @@ function upload (options, file) {
   options.headers.filename = file;
   return new Promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
+      const body = [];
+      response.setEncoding('utf8');
+      response.on('data', d => body.push(d));
       if (goodToGo(response) && !hasRedirect(response)) {
-        const body = [];
-        response.on('data', d => body.push(d));
         response.on('end', () => resolve(body.join('')));
+      } else if (!goodToGo(response)) {
+        reject(body);
       } else {
         validateMaxRedirect(reject);
         validateGoodToGo(reject, response);
         options.endpoint = response.headers.location;
         resolve(upload(options, file));
       }
-    }).on('error', e => reject(e));
+    });
+    req.on('error', (e) => {
+      console.log(`Problem with request: ${e.message}`);
+    });
     const stream = fs.ReadStream(file);
     stream.pipe(req);
     stream.on('close', (res) => {
