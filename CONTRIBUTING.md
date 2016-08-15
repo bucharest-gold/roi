@@ -67,26 +67,12 @@ $ git fetch upstream
 $ git rebase upstream/master
 ```
 
-### Start server | Code - Test - Code - Test... | Stop server
+### Development cycle
 
 Bug fixes and features should come with tests. Add your tests in the
 `test/roi-test.js` file.
 
-To write the tests you will need to install json-server and start in one terminal:
-
-```shell
-$ npm install -g json-server
-```
-
-Then
-
-```shell
-$ json-server --watch test/fixtures/db.json
-```
-
-This will use json file as 'endpoints' like a fake-server.
-
-Then you can start coding and watching the results of the tests with this command:
+You can start coding and watching the results of the tests with this command:
 
 ```shell
 $ make test

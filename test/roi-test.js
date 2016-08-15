@@ -21,6 +21,43 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const roi = require('../index');
+const jsonServer = require('json-server');
+
+function createDb () {
+  const db = {
+    'posts': [
+      {
+        'title': 'foo-json2',
+        'author': 'bgold',
+        'id': 1
+      },
+      {
+        'title': 'foo-json',
+        'author': 'bgold',
+        'id': 2
+      },
+      {
+        'title': 'foo-json',
+        'author': 'bgold',
+        'id': 3
+      }
+    ],
+    'comments': [],
+    'profile': {
+      'name': 'bgold'
+    }
+  };
+  return db;
+}
+
+function createServer () {
+  const server = jsonServer.create();
+  const router = jsonServer.router(createDb());
+  server.use(jsonServer.defaults());
+  server.use(router);
+  const s = server.listen(3000);
+  return s;
+}
 
 function createRedirectServer () {
   const server = http.createServer((request, response) => {
@@ -53,6 +90,7 @@ function createRedirectServer () {
 }
 
 test('Should get.', t => {
+  const server = createServer();
   const opts = {
     'endpoint': 'http://localhost:3000/posts'
   };
@@ -63,7 +101,7 @@ test('Should get.', t => {
       t.equal(x.headers['x-powered-by'], 'Express');
       const result = JSON.parse(x.body);
       t.equal(result[0].id, 1);
-      t.equal(1, 1);
+      server.close();
       t.end();
     }).catch(e => console.log(e));
 });
@@ -75,7 +113,8 @@ test('Should redirect with get.', t => {
   };
 
   roi.get(opts)
-    .then(x => {})
+    .then(x => {
+    })
     .catch(e => {
       t.equal(e.toString(), 'Error: Maximum redirects reached.');
       t.end();
@@ -84,6 +123,7 @@ test('Should redirect with get.', t => {
 });
 
 test('Should post.', t => {
+  const server = createServer();
   const opts = {
     'endpoint': 'http://localhost:3000/posts'
   };
@@ -96,12 +136,14 @@ test('Should post.', t => {
   roi.post(opts, foo)
     .then(x => {
       t.equal(x.statusCode, 201);
+      server.close();
       t.end();
     }).catch(e => console.log(e));
 });
 
 test('Should redirect and post.', t => {
-  const server = createRedirectServer();
+  const redirectServer = createRedirectServer();
+  const server = createServer();
   const opts = {
     'endpoint': 'http://localhost:3001/01.html'
   };
@@ -115,11 +157,13 @@ test('Should redirect and post.', t => {
     .then(x => {
       t.equal(x.statusCode, 201);
       t.end();
+      redirectServer.close();
       server.close();
     }).catch(e => console.log(e));
 });
 
 test('Should put.', t => {
+  const server = createServer();
   const opts = {
     'endpoint': 'http://localhost:3000/posts/1'
   };
@@ -132,12 +176,14 @@ test('Should put.', t => {
   roi.put(opts, foo)
     .then(x => {
       t.equal(x.statusCode, 200);
+      server.close();
       t.end();
     }).catch(e => console.log(e));
 });
 
 test('Should redirect and put.', t => {
-  const server = createRedirectServer();
+  const redirectServer = createRedirectServer();
+  const server = createServer();
   const opts = {
     'endpoint': 'http://localhost:3001/01.html'
   };
@@ -151,11 +197,13 @@ test('Should redirect and put.', t => {
     .then(x => {
       t.equal(x.statusCode, 201);
       t.end();
+      redirectServer.close();
       server.close();
     }).catch(e => console.log(e));
 });
 
 test('Should check if url exists.', t => {
+  const server = createServer();
   const opts = {
     'endpoint': 'https://github.com/bucharest-gold/roi'
   };
@@ -163,12 +211,14 @@ test('Should check if url exists.', t => {
   roi.exists(opts)
     .then(x => {
       t.equal(x.statusCode, 200);
+      server.close();
       t.end();
     }).catch(e => console.log(e));
 });
 
 test('Should redirect and delete.', t => {
-  const server = createRedirectServer();
+  const redirectServer = createRedirectServer();
+  const server = createServer();
   const opts = {
     'endpoint': 'http://localhost:3001/01.html'
   };
@@ -177,6 +227,7 @@ test('Should redirect and delete.', t => {
     .then(x => {
       t.equal(x.statusCode, 200);
       t.end();
+      redirectServer.close();
       server.close();
     }).catch(e => console.log(e));
 });
@@ -208,7 +259,8 @@ test('Should upload.', t => {
   };
 
   const server = require('http').createServer(up);
-  server.listen(3002, () => { });
+  server.listen(3002, () => {
+  });
 
   const opts = {
     'endpoint': 'http://localhost:3002/'
