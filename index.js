@@ -46,26 +46,13 @@ function goodToGo (response) {
 }
 
 function selectProtocol (options) {
-  const uri = url.parse(options.endpoint);
-  return uri.protocol === 'http:' ? http : https;
-}
-
-function extractHostname (options) {
-  return url.parse(options.endpoint).hostname;
-}
-
-function extractPath (options) {
-  return url.parse(options.endpoint).path;
-}
-
-function extractPort (options) {
-  return url.parse(options.endpoint).port;
+  return url.parse(options.endpoint).protocol === 'http:' ? http : https;
 }
 
 function extract (options) {
-  options.hostname = extractHostname(options);
-  options.port = extractPort(options);
-  options.path = extractPath(options);
+  options.hostname = url.parse(options.endpoint).hostname;
+  options.port = url.parse(options.endpoint).port;
+  options.path = url.parse(options.endpoint).path;
   return options;
 }
 
@@ -85,12 +72,8 @@ function addDefaultHeaders (options) {
   return options;
 }
 
-function maxRedirectsReached () {
-  return redirects >= maxRedirects;
-}
-
 function validateMaxRedirect (reject) {
-  if (maxRedirectsReached()) {
+  if (redirects >= maxRedirects) {
     redirects = 0;
     return reject(new Error('Maximum redirects reached.'));
   } else {

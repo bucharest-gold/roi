@@ -1,13 +1,37 @@
 'use strict';
 
-// To run the test:
-// npm install -g json-server
-// json-server --watch test/fixtures/db.json
-// another terminal run: npm run benchmark
+// npm run benchmark
 
 const roi = require('../index.js');
+const jsonServer = require('json-server');
 const rp = require('request-promise');
 const request = require('request');
+
+function createDb () {
+  const db = {
+    'posts': [
+      {
+        'title': 'foo-json2',
+        'author': 'bgold',
+        'id': 1
+      }
+    ],
+    'comments': [],
+    'profile': {
+      'name': 'bgold'
+    }
+  };
+  return db;
+}
+
+function createServer () {
+  const server = jsonServer.create();
+  const router = jsonServer.router(createDb());
+  server.use(jsonServer.defaults());
+  server.use(router);
+  const s = server.listen(3000);
+  return s;
+}
 
 function roiGET () {
   const opts = {
@@ -54,4 +78,5 @@ function runBenchmarks () {
   require('bench').runMain();
 }
 
+createServer();
 runBenchmarks();
