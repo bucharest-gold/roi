@@ -2,6 +2,8 @@
 
 A simple promisified http client library with zero deps.
 
+[![npm package](https://nodei.co/npm/roi.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/roi/)
+
 [![Build Status](https://travis-ci.org/bucharest-gold/roi.svg?branch=master)](https://travis-ci.org/bucharest-gold/roi)
 
 > _Node.js 4,5,6_
