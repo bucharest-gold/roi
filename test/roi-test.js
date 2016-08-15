@@ -101,8 +101,8 @@ test('Should get.', t => {
       t.equal(x.headers['x-powered-by'], 'Express');
       const result = JSON.parse(x.body);
       t.equal(result[0].id, 1);
-      server.close();
       t.end();
+      server.close();
     }).catch(e => console.log(e));
 });
 
@@ -136,8 +136,8 @@ test('Should post.', t => {
   roi.post(opts, foo)
     .then(x => {
       t.equal(x.statusCode, 201);
-      server.close();
       t.end();
+      server.close();
     }).catch(e => console.log(e));
 });
 
@@ -176,8 +176,8 @@ test('Should put.', t => {
   roi.put(opts, foo)
     .then(x => {
       t.equal(x.statusCode, 200);
-      server.close();
       t.end();
+      server.close();
     }).catch(e => console.log(e));
 });
 
@@ -211,8 +211,8 @@ test('Should check if url exists.', t => {
   roi.exists(opts)
     .then(x => {
       t.equal(x.statusCode, 200);
-      server.close();
       t.end();
+      server.close();
     }).catch(e => console.log(e));
 });
 
