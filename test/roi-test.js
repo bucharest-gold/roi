@@ -117,6 +117,7 @@ test('Should redirect with get.', t => {
 
   roi.get(opts)
     .then(x => {
+      t.fail('Should not have succeeded');
     })
     .catch(e => {
       t.equal(e.toString(), 'Error: Maximum redirects reached.');
