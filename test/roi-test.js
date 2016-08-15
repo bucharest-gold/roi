@@ -103,7 +103,10 @@ test('Should get.', t => {
       t.equal(result[0].id, 1);
       t.end();
       server.close();
-    }).catch(e => console.log(e));
+    }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should redirect with get.', t => {
@@ -138,7 +141,10 @@ test('Should post.', t => {
       t.equal(x.statusCode, 201);
       t.end();
       server.close();
-    }).catch(e => console.log(e));
+    }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should redirect and post.', t => {
@@ -159,7 +165,10 @@ test('Should redirect and post.', t => {
       t.end();
       redirectServer.close();
       server.close();
-    }).catch(e => console.log(e));
+    }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should put.', t => {
@@ -178,7 +187,10 @@ test('Should put.', t => {
       t.equal(x.statusCode, 200);
       t.end();
       server.close();
-    }).catch(e => console.log(e));
+    }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should redirect and put.', t => {
@@ -199,7 +211,10 @@ test('Should redirect and put.', t => {
       t.end();
       redirectServer.close();
       server.close();
-    }).catch(e => console.log(e));
+    }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should check if url exists.', t => {
@@ -213,7 +228,10 @@ test('Should check if url exists.', t => {
       t.equal(x.statusCode, 200);
       t.end();
       server.close();
-    }).catch(e => console.log(e));
+    }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should redirect and delete.', t => {
@@ -229,7 +247,10 @@ test('Should redirect and delete.', t => {
       t.end();
       redirectServer.close();
       server.close();
-    }).catch(e => console.log(e));
+    }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should download.', t => {
@@ -246,7 +267,10 @@ test('Should download.', t => {
         console.log(e);
       }
       t.end();
-    }).catch(e => console.log(e));
+    }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
 
 test('Should upload.', t => {
@@ -275,5 +299,8 @@ test('Should upload.', t => {
       }
       t.end();
       server.close();
-    }).catch(e => console.log(e));
+    }).catch(e => {
+      console.error(e.stack);
+      t.fail(e);
+    });
 });
