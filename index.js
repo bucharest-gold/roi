@@ -29,6 +29,7 @@ module.exports = exports = {
   upload: upload
 };
 
+const Fidelity = require('fidelity');
 const url = require('url');
 const http = require('http');
 const fs = require('fs');
@@ -105,7 +106,7 @@ function get (options) {
   const protocol = selectProtocol(options);
   options = extract(options);
   options = addDefaultHeaders(options);
-  return new Promise((resolve, reject) => {
+  return Fidelity.promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
       let body = [];
       response.setEncoding('utf8');
@@ -132,7 +133,7 @@ function post (options, data) {
   const jsonData = JSON.stringify(data);
   options = addDefaultHeaders(options);
   options.headers['Content-Length'] = jsonData.length;
-  return new Promise((resolve, reject) => {
+  return Fidelity.promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
       let body = [];
       response.setEncoding('utf8');
@@ -160,7 +161,7 @@ function put (options, data) {
   const jsonData = JSON.stringify(data);
   options = addDefaultHeaders(options);
   options.headers['Content-Length'] = jsonData.length;
-  return new Promise((resolve, reject) => {
+  return Fidelity.promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
       let body = [];
       response.setEncoding('utf8');
@@ -186,7 +187,7 @@ function del (options) {
   options = extract(options);
   options = addDefaultHeaders(options);
   options.method = 'DELETE';
-  return new Promise((resolve, reject) => {
+  return Fidelity.promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
       let body = [];
       response.setEncoding('utf8');
@@ -210,7 +211,7 @@ function exists (options) {
   const protocol = selectProtocol(options);
   options = extract(options);
   options.method = 'HEAD';
-  return new Promise((resolve, reject) => {
+  return Fidelity.promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
       let body = [];
       response.setEncoding('utf8');
@@ -234,7 +235,7 @@ function download (options, file) {
   const protocol = selectProtocol(options);
   options = extract(options);
   options = addDefaultHeaders(options);
-  return new Promise((resolve, reject) => {
+  return Fidelity.promise((resolve, reject) => {
     const stream = fs.createWriteStream(file);
     const req = protocol.request(options, (response) => {
       if (goodToGo(response) && !hasRedirect(response)) {
@@ -260,7 +261,7 @@ function upload (options, file) {
   options.method = 'POST';
   options = addDefaultHeaders(options);
   options.headers.filename = file;
-  return new Promise((resolve, reject) => {
+  return Fidelity.promise((resolve, reject) => {
     const req = protocol.request(options, (response) => {
       let body = [];
       response.setEncoding('utf8');
