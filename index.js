@@ -72,6 +72,11 @@ function addDefaultHeaders (options) {
   return options;
 }
 
+function validate (reject, response) {
+  validateMaxRedirect(reject);
+  validateGoodToGo(reject, response);
+}
+
 function validateMaxRedirect (reject) {
   if (redirects >= maxRedirects) {
     redirects = 0;
@@ -110,8 +115,7 @@ function get (options) {
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
-        validateMaxRedirect(reject);
-        validateGoodToGo(reject, response);
+        validate(reject, response);
         options.endpoint = response.headers.location;
         resolve(get(options));
       }
@@ -138,8 +142,7 @@ function post (options, data) {
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
-        validateMaxRedirect(reject);
-        validateGoodToGo(reject, response);
+        validate(reject, response);
         options.endpoint = response.headers.location;
         resolve(post(options, data));
       }
@@ -167,8 +170,7 @@ function put (options, data) {
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
-        validateMaxRedirect(reject);
-        validateGoodToGo(reject, response, body);
+        validate(reject, response);
         options.endpoint = response.headers.location;
         resolve(put(options, data));
       }
@@ -194,8 +196,7 @@ function del (options) {
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
-        validateMaxRedirect(reject);
-        validateGoodToGo(reject, response);
+        validate(reject, response);
         options.endpoint = response.headers.location;
         resolve(del(options));
       }
@@ -219,8 +220,7 @@ function exists (options) {
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
-        validateMaxRedirect(reject);
-        validateGoodToGo(reject, response);
+        validate(reject, response);
         options.endpoint = response.headers.location;
         resolve(exists(options));
       }
@@ -244,8 +244,7 @@ function download (options, file) {
           stream.close();
         });
       } else {
-        validateMaxRedirect(reject);
-        validateGoodToGo(reject, response);
+        validate(reject, response);
         options.endpoint = response.headers.location;
         resolve(download(options, file));
       }
@@ -271,8 +270,7 @@ function upload (options, file) {
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
-        validateMaxRedirect(reject);
-        validateGoodToGo(reject, response);
+        validate(reject, response);
         options.endpoint = response.headers.location;
         resolve(upload(options, file));
       }
