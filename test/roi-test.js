@@ -104,7 +104,7 @@ test('Should get.', t => {
       t.end();
       server.close();
     }).catch(e => {
-      console.error(e.stack);
+      console.error(e);
       t.fail(e);
     });
 });
@@ -132,10 +132,7 @@ test('Should post.', t => {
     'endpoint': 'http://localhost:3000/posts'
   };
 
-  const foo = {
-    title: 'foo-json',
-    author: 'bgold'
-  };
+  const foo = {};
 
   roi.post(opts, foo)
     .then(x => {
@@ -143,7 +140,7 @@ test('Should post.', t => {
       t.end();
       server.close();
     }).catch(e => {
-      console.error(e.stack);
+      console.error(e);
       t.fail(e);
     });
 });
@@ -167,7 +164,7 @@ test('Should redirect and post.', t => {
       redirectServer.close();
       server.close();
     }).catch(e => {
-      console.error(e.stack);
+      console.error(e);
       t.fail(e);
     });
 });
@@ -189,7 +186,7 @@ test('Should put.', t => {
       t.end();
       server.close();
     }).catch(e => {
-      console.error(e.stack);
+      console.error(e);
       t.fail(e);
     });
 });
@@ -213,7 +210,7 @@ test('Should redirect and put.', t => {
       redirectServer.close();
       server.close();
     }).catch(e => {
-      console.error(e.stack);
+      console.error(e);
       t.fail(e);
     });
 });
@@ -230,7 +227,7 @@ test('Should check if url exists.', t => {
       t.end();
       server.close();
     }).catch(e => {
-      console.error(e.stack);
+      console.error(e);
       t.fail(e);
     });
 });
@@ -249,7 +246,7 @@ test('Should redirect and delete.', t => {
       redirectServer.close();
       server.close();
     }).catch(e => {
-      console.error(e.stack);
+      console.error(e);
       t.fail(e);
     });
 });
@@ -265,12 +262,10 @@ test('Should download.', t => {
         fs.statSync('/tmp/aesh.jar');
         t.equal(x.statusCode, 200);
       } catch (e) {
-        console.log(e);
+        console.error(e);
+        t.fail(e);
       }
       t.end();
-    }).catch(e => {
-      console.error(e.stack);
-      t.fail(e);
     });
 });
 
@@ -296,12 +291,10 @@ test('Should upload.', t => {
         fs.statSync('/tmp/uploaded.jar');
         t.equal(1, 1);
       } catch (e) {
-        console.log(e);
+        console.error(e);
+        t.fail(e);
       }
       t.end();
       server.close();
-    }).catch(e => {
-      console.error(e.stack);
-      t.fail(e);
     });
 });

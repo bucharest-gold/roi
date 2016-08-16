@@ -87,3 +87,44 @@ Please read the [contributing guide](./CONTRIBUTING.md)
     roi.download(opts, '/tmp/aesh.jar')
     .then(x => console.log(x))
     .catch(e => console.log(e));
+
+
+## Benchmarks
+
+    Scores: (bigger is better)
+
+    roiGET
+    Raw:
+    > 1.1398601398601398
+    > 1.1838161838161838
+    > 1.170829170829171
+    > 1.1808191808191808
+    Average (mean) 1.1688311688311688
+
+    requestGET
+    Raw:
+    > 0.8211788211788211
+    > 0.8881118881118881
+    > 0.8911088911088911
+    > 0.8311688311688312
+    Average (mean) 0.857892107892108
+
+    requestPromiseGET
+    Raw:
+    > 0.8731268731268731
+    > 0.7982017982017982
+    > 0.8792415169660679
+    > 0.8761238761238761
+    Average (mean) 0.8566735161046539
+
+    Winner: roiGET
+    Compared with next highest (requestGET), it's:
+    26.6% faster
+    1.36 times as fast
+    0.13 order(s) of magnitude faster
+    A LITTLE FASTER
+
+    Compared with the slowest (requestPromiseGET), it's:
+    26.71% faster
+    1.36 times as fast
+    0.13 order(s) of magnitude faster

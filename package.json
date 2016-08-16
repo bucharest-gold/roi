@@ -37,5 +37,8 @@
     "type": "git",
     "url": "bucharest-gold/roi"
   },
-  "bugs": "https://github.com/bucharest-gold/roi/issues"
+  "bugs": "https://github.com/bucharest-gold/roi/issues",
+  "dependencies": {
+    "fidelity": "file:../fidelity"
+  }
 }
