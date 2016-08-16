@@ -1,6 +1,6 @@
 # roi
 
-A simple promisified http client library with zero deps.
+A basic and fast REST http-client library.
 
 [![npm package](https://nodei.co/npm/roi.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/roi/)
 
