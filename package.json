@@ -39,6 +39,6 @@
   },
   "bugs": "https://github.com/bucharest-gold/roi/issues",
   "dependencies": {
-    "fidelity": "^3.0.1"
+    "fidelity": "file:../fidelity"
   }
 }
