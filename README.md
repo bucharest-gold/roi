@@ -4,7 +4,7 @@ A basic and fast REST http-client library.
 
 [![npm package](https://nodei.co/npm/roi.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/roi/)
 
-[![Build Status](https://travis-ci.org/bucharest-gold/roi.svg?branch=master)](https://travis-ci.org/bucharest-gold/roi)
+[![Build Status](https://travis-ci.org/bucharest-gold/roi.svg?branch=master)](https://travis-ci.org/bucharest-gold/roi) [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
 
 > _Node.js 4,5,6_
 
