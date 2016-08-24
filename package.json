@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "tape test/roi-test.js",
-    "lint": "jshint index.js test/roi-test.js",
-    "format": "semistandard",
+    "lint": "eslint .",
     "benchmark": "node benchmark/benchmark.js"
   },
   "files": [
@@ -23,12 +22,16 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "bench": "^0.3.6",
-    "jshint": "^2.9.2",
+    "eslint": "^3.3.1",
+    "eslint-config-semistandard": "^7.0.0-beta.0",
+    "eslint-config-standard": "^6.0.0",
+    "eslint-plugin-promise": "^2.0.1",
+    "eslint-plugin-react": "^6.1.2",
+    "eslint-plugin-standard": "^2.0.0",
     "json-server": "0.8.14",
     "lodash": "^4.15.0",
     "request": "^2.72.0",
     "request-promise": "^3.0.0",
-    "semistandard": "^8.0.0",
     "tape": "^4.5.1",
     "v8-profiler": "^5.6.5"
   },
