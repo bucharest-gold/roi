@@ -3,3 +3,4 @@ coverage
 *.log
 test/fixtures/db.json
 .vscode
+*.cpuprofile

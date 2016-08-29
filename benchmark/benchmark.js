@@ -2,10 +2,28 @@
 
 // npm run benchmark
 
+// ======================================================================
+const profiler = require('v8-profiler');
+const fs = require('fs');
+// ======================================================================
 const roi = require('../index.js');
 const jsonServer = require('json-server');
 const rp = require('request-promise');
 const request = require('request');
+
+// ======================================================================
+profiler.startProfiling('', true);
+console.log('started');
+setTimeout(() => {
+  console.log('finished');
+  let profile = profiler.stopProfiling('');
+  profile.export()
+  .pipe(fs.createWriteStream('./prof-' + Date.now() + '.cpuprofile'))
+  .once('error', profiler.deleteAllProfiles)
+  .once('finish', profiler.deleteAllProfiles);
+  profiler.deleteAllProfiles();
+}, 1000);
+// ======================================================================
 
 function createDb () {
   const db = {
