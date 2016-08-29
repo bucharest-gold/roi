@@ -17,10 +17,8 @@ console.log('started');
 setTimeout(() => {
   console.log('finished');
   let profile = profiler.stopProfiling('');
-  profile.export()
-  .pipe(fs.createWriteStream('./prof-' + Date.now() + '.cpuprofile'))
-  .once('error', profiler.deleteAllProfiles)
-  .once('finish', profiler.deleteAllProfiles);
+  let data = JSON.stringify(profile, null, 2);
+  fs.writeFileSync('prof.cpuprofile', data, 'utf8');
   profiler.deleteAllProfiles();
 }, 1000);
 // ======================================================================
