@@ -16,7 +16,6 @@
 
 'use strict';
 
-const Genet = require('genet');
 const test = require('tape');
 const http = require('http');
 const url = require('url');
@@ -80,11 +79,18 @@ function createRedirectServer () {
         'Location': 'http://localhost:3001/02.html'});
         response.end('Redirected from 01.');
       }
-    }
-    if (url.parse(request.url).pathname === '/02.html') {
+    } else if (url.parse(request.url).pathname === '/02.html') {
       response.writeHead(301, {'content-type': 'text/html',
       'Location': 'http://localhost:3001/01.html'});
       response.end('Redirected from 02.');
+    } else if (url.parse(request.url).pathname === '/05.html') {
+      response.writeHead(301, {'content-type': 'text/html',
+      'Location': 'http://localhost:3000/posts'});
+      response.end('Redirected from 05.');
+    } else if (url.parse(request.url).pathname === '/06.html') {
+      response.writeHead(301, {'content-type': 'text/html',
+      'Location': 'http://localhost:3000/postaaaa'});
+      response.end('Redirected from 06.');
     }
   });
   return server.listen(3001, 'localhost');
@@ -95,13 +101,6 @@ test('Should get.', t => {
   const opts = {
     'endpoint': 'http://localhost:3000/posts'
   };
-
-  let genet = new Genet({ outputFile: './roi.cpuprofile',
-                       showAppOnly: true,
-                       duration: 1000,
-                       verbose: true,
-                       filter: 'roi' });
-  genet.start();
 
   roi.get(opts)
     .then(x => {
@@ -117,7 +116,7 @@ test('Should get.', t => {
     });
 });
 
-test('Should redirect with get.', t => {
+test('Should reach maximum redirects with get.', t => {
   const server = createRedirectServer();
   const opts = {
     'endpoint': 'http://localhost:3001/01.html'
@@ -131,6 +130,46 @@ test('Should redirect with get.', t => {
       t.equal(e.toString(), 'Error: Maximum redirects reached.');
       t.end();
       server.close();
+    });
+});
+
+test('Should redirect with get and succeed.', t => {
+  const redirectServer = createRedirectServer();
+  const server = createServer();
+  const opts = {
+    'endpoint': 'http://localhost:3001/05.html'
+  };
+
+  roi.get(opts)
+    .then(x => {
+      t.equal(x.statusCode, 200);
+      t.end();
+      server.close();
+      redirectServer.close();
+    })
+    .catch(e => {
+      console.error(e);
+      t.fail();
+    });
+});
+
+test('Should redirect with get and succeed to 404.', t => {
+  const redirectServer = createRedirectServer();
+  const server = createServer();
+  const opts = {
+    'endpoint': 'http://localhost:3001/06.html'
+  };
+
+  roi.get(opts)
+    .then(x => {
+      t.equal(x.statusCode, 404);
+      t.end();
+      server.close();
+      redirectServer.close();
+    })
+    .catch(e => {
+      console.error(e);
+      t.fail();
     });
 });
 
@@ -211,9 +250,9 @@ test('Should redirect and put.', t => {
     author: 'bgold'
   };
 
-  roi.post(opts, foo)
+  roi.put(opts, foo)
     .then(x => {
-      t.equal(x.statusCode, 201);
+      t.equal(x.statusCode, 200);
       t.end();
       redirectServer.close();
       server.close();

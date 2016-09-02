@@ -46,6 +46,10 @@ function goodToGo (response) {
   return response.statusCode < 400;
 }
 
+function notFound (response) {
+  return response.statusCode === 404;
+}
+
 function selectProtocol (options) {
   return url.parse(options.endpoint).protocol === 'http:' ? http : https;
 }
@@ -111,7 +115,8 @@ function get (options) {
       let body = [];
       response.setEncoding('utf8');
       response.on('data', d => body.push(d));
-      if (goodToGo(response) && !hasRedirect(response)) {
+      if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
+        redirects = 0;
         response.on('end', () => resolve(coolResponse(body, response)));
       } else if (!goodToGo(response)) {
         reject(body);
@@ -138,7 +143,8 @@ function post (options, data) {
       let body = [];
       response.setEncoding('utf8');
       response.on('data', d => body.push(d));
-      if (goodToGo(response) && !hasRedirect(response)) {
+      if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
+        redirects = 0;
         response.on('end', () => resolve(coolResponse(body, response)));
       } else if (!goodToGo(response)) {
         reject(body);
@@ -166,7 +172,8 @@ function put (options, data) {
       let body = [];
       response.setEncoding('utf8');
       response.on('data', d => body.push(d));
-      if (goodToGo(response) && !hasRedirect(response)) {
+      if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
+        redirects = 0;
         response.on('end', () => resolve(coolResponse(body, response)));
       } else if (!goodToGo(response)) {
         reject(body);
@@ -192,7 +199,8 @@ function del (options) {
       let body = [];
       response.setEncoding('utf8');
       response.on('data', d => body.push(d));
-      if (goodToGo(response) && !hasRedirect(response)) {
+      if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
+        redirects = 0;
         response.on('end', () => resolve(coolResponse(body, response)));
       } else if (!goodToGo(response)) {
         reject(body);
@@ -216,7 +224,8 @@ function exists (options) {
       let body = [];
       response.setEncoding('utf8');
       response.on('data', d => body.push(d));
-      if (goodToGo(response) && !hasRedirect(response)) {
+      if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
+        redirects = 0;
         response.on('end', () => resolve(coolResponse(body, response)));
       } else if (!goodToGo(response)) {
         reject(body);
@@ -238,7 +247,8 @@ function download (options, file) {
   return new Fidelity((resolve, reject) => {
     const stream = fs.createWriteStream(file);
     const req = protocol.request(options, (response) => {
-      if (goodToGo(response) && !hasRedirect(response)) {
+      if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
+        redirects = 0;
         response.pipe(stream);
         stream.on('finish', () => {
           resolve(response);
@@ -266,7 +276,8 @@ function upload (options, file) {
       let body = [];
       response.setEncoding('utf8');
       response.on('data', d => body.push(d));
-      if (goodToGo(response) && !hasRedirect(response)) {
+      if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
+        redirects = 0;
         response.on('end', () => resolve(coolResponse(body, response)));
       } else if (!goodToGo(response)) {
         reject(body);
