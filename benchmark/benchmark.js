@@ -1,27 +1,10 @@
 'use strict';
 
-// npm run benchmark
-
-// ======================================================================
-const profiler = require('v8-profiler');
-const fs = require('fs');
-// ======================================================================
+const Genet = require('genet');
 const roi = require('../index.js');
 const jsonServer = require('json-server');
 const rp = require('request-promise');
 const request = require('request');
-
-// ======================================================================
-profiler.startProfiling('', true);
-console.log('started');
-setTimeout(() => {
-  console.log('finished');
-  let profile = profiler.stopProfiling('');
-  let data = JSON.stringify(profile, null, 2);
-  fs.writeFileSync('prof.cpuprofile', data, 'utf8');
-  profiler.deleteAllProfiles();
-}, 1000);
-// ======================================================================
 
 function createDb () {
   const db = {
@@ -95,4 +78,6 @@ function runBenchmarks () {
 }
 
 createServer();
+let genet = new Genet({ outputFile: './roi.cpuprofile', flamegraph: true, verbose: true, filter: 'roi' });
+genet.start();
 runBenchmarks();

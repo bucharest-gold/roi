@@ -6,7 +6,8 @@
   "scripts": {
     "test": "tape test/roi-test.js",
     "lint": "eslint .",
-    "benchmark": "node benchmark/benchmark.js"
+    "benchmark": "node benchmark/benchmark.js",
+    "prepublish": "nsp check"
   },
   "files": [
     "index.js",
@@ -28,12 +29,13 @@
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-react": "^6.1.2",
     "eslint-plugin-standard": "^2.0.0",
+    "genet": "git://github.com/bucharest-gold/genet",
     "json-server": "0.8.14",
     "lodash": "^4.15.0",
+    "nsp": "^2.6.1",
     "request": "^2.72.0",
     "request-promise": "^3.0.0",
-    "tape": "^4.5.1",
-    "v8-profiler": "^5.6.5"
+    "tape": "^4.5.1"
   },
   "homepage": "https://github.com/bucharest-gold/roi#readme",
   "repository": {
