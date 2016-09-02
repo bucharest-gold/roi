@@ -16,6 +16,7 @@
 
 'use strict';
 
+const Genet = require('genet');
 const test = require('tape');
 const http = require('http');
 const url = require('url');
@@ -94,6 +95,13 @@ test('Should get.', t => {
   const opts = {
     'endpoint': 'http://localhost:3000/posts'
   };
+
+  let genet = new Genet({ outputFile: './roi.cpuprofile',
+                       showAppOnly: true,
+                       duration: 1000,
+                       verbose: true,
+                       filter: 'roi' });
+  genet.start();
 
   roi.get(opts)
     .then(x => {
