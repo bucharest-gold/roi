@@ -345,3 +345,93 @@ test('Should upload.', t => {
       server.close();
     });
 });
+
+test('Should get and 404.', t => {
+  const server = createServer();
+  const opts = {
+    'endpoint': 'http://localhost:3000/foo.html'
+  };
+
+  roi.get(opts)
+    .then(x => {
+      t.equal(x.statusCode, 404);
+      t.end();
+      server.close();
+    })
+    .catch(e => {
+      console.error(e);
+      t.fail();
+    });
+});
+
+test('Should post and 404.', t => {
+  const server = createServer();
+  const opts = {
+    'endpoint': 'http://localhost:3000/foo.html'
+  };
+
+  roi.post(opts)
+    .then(x => {
+      t.equal(x.statusCode, 404);
+      t.end();
+      server.close();
+    })
+    .catch(e => {
+      console.error(e);
+      t.fail();
+    });
+});
+
+test('Should put and 404.', t => {
+  const server = createServer();
+  const opts = {
+    'endpoint': 'http://localhost:3000/foo.html'
+  };
+
+  roi.put(opts)
+    .then(x => {
+      t.equal(x.statusCode, 404);
+      t.end();
+      server.close();
+    })
+    .catch(e => {
+      console.error(e);
+      t.fail();
+    });
+});
+
+test('Should delete and 404.', t => {
+  const server = createServer();
+  const opts = {
+    'endpoint': 'http://localhost:3000/foo.html'
+  };
+
+  roi.del(opts)
+    .then(x => {
+      t.equal(x.statusCode, 404);
+      t.end();
+      server.close();
+    })
+    .catch(e => {
+      console.error(e);
+      t.fail();
+    });
+});
+
+test('Should download and 404.', t => {
+  const server = createServer();
+  const opts = {
+    'endpoint': 'http://localhost:3000/foo.html'
+  };
+
+  roi.download(opts, './foo.html')
+    .then(x => {
+      t.equal(x.statusCode, 404);
+      t.end();
+      server.close();
+    })
+    .catch(e => {
+      console.error(e);
+      t.fail();
+    });
+});

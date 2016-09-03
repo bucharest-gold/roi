@@ -132,6 +132,7 @@ function get (options) {
 }
 
 function post (options, data) {
+  data = data || {};
   const protocol = selectProtocol(options);
   options = extract(options);
   options.method = 'POST';
@@ -161,6 +162,7 @@ function post (options, data) {
 }
 
 function put (options, data) {
+  data = data || {};
   const protocol = selectProtocol(options);
   options = extract(options);
   options.method = 'PUT';
