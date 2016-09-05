@@ -117,7 +117,10 @@ function get (options) {
       response.on('data', d => body.push(d));
       if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
         redirects = 0;
-        response.on('end', () => resolve(coolResponse(body, response)));
+        response.on('end', () => {
+          body = body.join('');
+          resolve(coolResponse(body, response));
+        });
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
@@ -146,7 +149,10 @@ function post (options, data) {
       response.on('data', d => body.push(d));
       if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
         redirects = 0;
-        response.on('end', () => resolve(coolResponse(body, response)));
+        response.on('end', () => {
+          body = body.join('');
+          resolve(coolResponse(body, response));
+        });
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
@@ -176,7 +182,10 @@ function put (options, data) {
       response.on('data', d => body.push(d));
       if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
         redirects = 0;
-        response.on('end', () => resolve(coolResponse(body, response)));
+        response.on('end', () => {
+          body = body.join('');
+          resolve(coolResponse(body, response));
+        });
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
@@ -203,7 +212,10 @@ function del (options) {
       response.on('data', d => body.push(d));
       if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
         redirects = 0;
-        response.on('end', () => resolve(coolResponse(body, response)));
+        response.on('end', () => {
+          body = body.join('');
+          resolve(coolResponse(body, response));
+        });
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
@@ -228,7 +240,10 @@ function exists (options) {
       response.on('data', d => body.push(d));
       if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
         redirects = 0;
-        response.on('end', () => resolve(coolResponse(body, response)));
+        response.on('end', () => {
+          body = body.join('');
+          resolve(coolResponse(body, response));
+        });
       } else if (!goodToGo(response)) {
         reject(body);
       } else {
@@ -280,7 +295,10 @@ function upload (options, file) {
       response.on('data', d => body.push(d));
       if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
         redirects = 0;
-        response.on('end', () => resolve(coolResponse(body, response)));
+        response.on('end', () => {
+          body = body.join('');
+          resolve(coolResponse(body, response));
+        });
       } else if (!goodToGo(response)) {
         reject(body);
       } else {

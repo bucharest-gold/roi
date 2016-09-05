@@ -6,3 +6,4 @@ test/fixtures/db.json
 *.cpuprofile
 *.txt
 *.svg
+foo.html
