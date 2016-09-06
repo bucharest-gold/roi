@@ -29,7 +29,7 @@
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-react": "^6.1.2",
     "eslint-plugin-standard": "^2.0.0",
-    "genet": "0.0.1",
+    "genet": "^0.0.1",
     "json-server": "0.8.14",
     "lodash": "^4.15.0",
     "nsp": "^2.6.1",

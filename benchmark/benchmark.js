@@ -78,6 +78,15 @@ function runBenchmarks () {
 }
 
 createServer();
-let genet = new Genet({ outputFile: './roi.cpuprofile', flamegraph: true, verbose: true, filter: 'roi' });
-genet.start();
+
+const profile = new Genet({
+  outputFile: './roi.cpuprofile',
+  duration: 10000,
+  showAppOnly: true,
+  flamegraph: true,
+  verbose: true,
+  filter: 'roi'
+});
+profile.start();
+
 runBenchmarks();
