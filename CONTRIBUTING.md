@@ -18,18 +18,18 @@ Discussions can be done via github issues or IRC channel #brass-monkey.
 Fork the project [on GitHub](https://github.com/bucharest-gold/roi)
 and check out your copy locally.
 
-```shell
-$ git clone git@github.com:username/roi.git
-$ cd roi
-$ git remote add upstream https://github.com/bucharest-gold/roi.git
+```
+git clone git@github.com:username/roi.git
+cd roi
+git remote add upstream https://github.com/bucharest-gold/roi.git
 ```
 
 ### Branch
 
 Create a feature branch and start hacking:
 
-```shell
-$ git checkout -b my-contrib-branch
+```
+git checkout -b my-contrib-branch
 ```
 
 ### Commit messages
@@ -62,29 +62,24 @@ nicely even when it is indented.
 
 Use `git rebase` to sync your work from time to time.
 
-```shell
-$ git fetch upstream
-$ git rebase upstream/master
+```
+git fetch upstream
+git rebase upstream/master
 ```
 
 ### Development cycle
 
-Bug fixes and features should come with tests. Add your tests in the
-`test/roi-test.js` file.
+Bug fixes and features should come with tests.
+The tests are on `test` directory.
 
-You can start coding and watching the results of the tests with this command:
-
-```shell
-$ make test
+```
+make
 ```
 
-Make sure the jshint and semistandard are happy and that all tests pass. Please, do not submit
-patches that fail either check.
+### Push
 
-### Step 6: Push
-
-```shell
-$ git push origin my-contrib-branch
+```
+git push origin my-contrib-branch
 ```
 
 Go to https://github.com/yourusername/roi and select your feature branch.

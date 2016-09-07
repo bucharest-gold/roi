@@ -1,16 +1,20 @@
 # roi
 
+[![Build Status](https://travis-ci.org/bucharest-gold/roi.svg?branch=master)](https://travis-ci.org/bucharest-gold/roi)
+[![dependencies Status](https://david-dm.org/bucharest-gold/roi/status.svg)](https://david-dm.org/bucharest-gold/roi)
+
+[![NPM](https://nodei.co/npm/roi.png)](https://npmjs.org/package/roi)
+
 A basic and fast REST http-client library.
 
-[![npm package](https://nodei.co/npm/roi.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/roi/)
+|                 | Project Info  |
+| --------------- | ------------- |
+| License:        | Apache-2.0 |
+| Build:          | make |
+| Documentation:  | N/A |
+| Issue tracker:  | https://github.com/bucharest-gold/roi/issues |
+| Engines:        | Node.js 4.x, 5.x, 6.x |
 
-[![Build Status](https://travis-ci.org/bucharest-gold/roi.svg?branch=master)](https://travis-ci.org/bucharest-gold/roi) [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/Flet/semistandard)
-
-> _Node.js 4,5,6_
-
-## Contributing
-
-Please read the [contributing guide](./CONTRIBUTING.md)
 
 ## Usage:
 
@@ -128,3 +132,7 @@ Please read the [contributing guide](./CONTRIBUTING.md)
     26.71% faster
     1.36 times as fast
     0.13 order(s) of magnitude faster
+
+## Contributing
+
+Please read the [contributing guide](./CONTRIBUTING.md)
