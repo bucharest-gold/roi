@@ -15,29 +15,29 @@ A basic and fast REST http-client library.
 | Issue tracker:  | https://github.com/bucharest-gold/roi/issues |
 | Engines:        | Node.js 4.x, 5.x, 6.x |
 
+## Installation
 
-## Usage:
+    npm install roi -S
 
-    -- General example:
-    roi.get(options)
-    .then(x => {
-       console.log(x.statusCode);
-       console.log(x.headers);
-       console.log(x.body);
-       console.log(JSON.parse(x.body).foo);
-     })
-    .catch(e => console.log(e));
+## Usage
 
-    -- GET:
+    const roi = require('roi');
+
     const options = {
       'endpoint': 'http://localhost:3000/posts'
     };
 
     roi.get(options)
-    .then(x => console.log(x))
+    .then(x => {
+       console.log(x);
+       console.log(x.statusCode);
+       console.log(x.headers);
+       console.log(x.body);
+     })
     .catch(e => console.log(e));
 
-    -- POST:
+## More examples
+
     const options = {
       'endpoint': 'http://localhost:3000/posts'
     };
@@ -51,7 +51,6 @@ A basic and fast REST http-client library.
     .then(x => console.log(x))
     .catch(e => console.log(e));
 
-    -- PUT:
     const options = {
       'endpoint': 'http://localhost:3000/posts/2'
     };
@@ -65,7 +64,6 @@ A basic and fast REST http-client library.
     .then(x => console.log(x))
     .catch(e => console.log(e));
 
-    -- DELETE:
     const options = {
       'endpoint': 'http://localhost:3000/posts/3'
     };
@@ -74,7 +72,6 @@ A basic and fast REST http-client library.
     .then(x => console.log(x))
     .catch(e => console.log(e));
 
-    -- EXISTS:
     const options = {
       'endpoint': 'http://localhost:3000/posts/3'
     };
@@ -83,7 +80,6 @@ A basic and fast REST http-client library.
     .then(x => console.log(x.statusCode === 200))
     .catch(e => console.log(e));
 
-    -- DOWNLOAD:
     const opts = {
       'endpoint': 'http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar'
     };

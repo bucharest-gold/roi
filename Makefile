@@ -1,3 +1,6 @@
+ci: test
+	npm run coverage
+
 test: lint
 	npm test
 

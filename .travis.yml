@@ -6,7 +6,7 @@ node_js:
   - "5"
   - "6"
 script:
-   - make
+   - make ci
 notifications:
   irc: "irc.freenode.org#brass-monkey"
 branches:
