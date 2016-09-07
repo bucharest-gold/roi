@@ -61,6 +61,15 @@ function requestGET () {
 }
 
 function runBenchmarks () {
+  const profile = new Genet({
+    profileName: 'roi',
+    filter: /^(?!.*benchmark)(?=.*roi).*/,
+    duration: 10000,
+    showAppOnly: true,
+    verbose: true,
+    flamegraph: true
+  });
+
   exports.compare = {
     'roiGET': function (done) {
       roiGET().then(done);
@@ -73,20 +82,18 @@ function runBenchmarks () {
     }
   };
 
-  exports.time = 1000;
-  require('bench').runMain();
+  exports.done = function (data) {
+    profile.stop().then(() => console.log('Profiling stopped'));
+    bench.show(data);
+  };
+
+  exports.time = 5000;
+  exports.countPerLap = 6;
+  exports.compareCount = 8;
+  profile.start();
+  const bench = require('bench');
+  bench.runMain();
 }
 
 createServer();
-
-const profile = new Genet({
-  outputFile: './roi.cpuprofile',
-  duration: 10000,
-  showAppOnly: true,
-  flamegraph: true,
-  verbose: true,
-  filter: 'roi'
-});
-profile.start();
-
 runBenchmarks();
