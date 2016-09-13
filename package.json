@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "tape test/roi-test.js | tap-spec",
-    "lint": "eslint .",
+    "lint": "eslint test/*.js index.js benchmark/*.js",
     "benchmark": "node benchmark/benchmark.js",
     "prepublish": "nsp check",
     "coverage": "istanbul cover tape test/roi-test.js"
