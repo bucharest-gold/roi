@@ -11,8 +11,10 @@
     "coverage": "istanbul cover tape test/roi-test.js"
   },
   "files": [
-    "index.js",
-    "test"
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "index.js"
   ],
   "keywords": [
     "http",
