@@ -7,6 +7,7 @@
     "test": "tape test/roi-test.js | tap-spec",
     "lint": "eslint test/*.js index.js benchmark/*.js",
     "benchmark": "node benchmark/benchmark.js",
+    "profile": "node benchmark/profile.js",
     "prepublish": "nsp check",
     "coverage": "istanbul cover tape test/roi-test.js"
   },
