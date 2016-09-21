@@ -9,7 +9,8 @@
     "benchmark": "node benchmark/benchmark.js",
     "profile": "node benchmark/profile.js",
     "prepublish": "nsp check",
-    "coverage": "istanbul cover tape test/roi-test.js"
+    "coverage": "istanbul cover tape test/roi-test.js",
+    "dependencyCheck": "szero . --ci=true"
   },
   "files": [
     "package.json",
