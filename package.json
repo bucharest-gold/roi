@@ -10,7 +10,7 @@
     "profile": "node benchmark/profile.js",
     "prepublish": "nsp check",
     "coverage": "istanbul cover tape test/roi-test.js",
-    "dependencyCheck": "szero . --ci=true"
+    "dependencyCheck": "szero . --ci"
   },
   "files": [
     "package.json",
