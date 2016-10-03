@@ -68,12 +68,20 @@ function auth (options) {
   return '';
 }
 
-function addDefaultHeaders (options) {
-  options.headers = {
-    'Accept': 'application/json,text/plain',
-    'Content-type': 'application/json',
-    'Authorization': auth(options)
-  };
+function addHeaders (options) {
+  if (options.headers) {
+    options.headers = {
+      'Accept': options.headers.Accept,
+      'Content-type': options.headers['Content-type'],
+      'Authorization': auth(options)
+    };
+  } else {
+    options.headers = {
+      'Accept': 'application/json,text/plain',
+      'Content-type': 'application/json',
+      'Authorization': auth(options)
+    };
+  }
   return options;
 }
 
@@ -109,7 +117,7 @@ function coolResponse (body, response) {
 function get (options) {
   const protocol = selectProtocol(options);
   options = extract(options);
-  options = addDefaultHeaders(options);
+  options = addHeaders(options);
   return new Fidelity((resolve, reject) => {
     const req = protocol.request(options, (response) => {
       let body = [];
@@ -140,7 +148,7 @@ function post (options, data) {
   options = extract(options);
   options.method = 'POST';
   const jsonData = JSON.stringify(data);
-  options = addDefaultHeaders(options);
+  options = addHeaders(options);
   options.headers['Content-Length'] = jsonData.length;
   return new Fidelity((resolve, reject) => {
     const req = protocol.request(options, (response) => {
@@ -173,7 +181,7 @@ function put (options, data) {
   options = extract(options);
   options.method = 'PUT';
   const jsonData = JSON.stringify(data);
-  options = addDefaultHeaders(options);
+  options = addHeaders(options);
   options.headers['Content-Length'] = jsonData.length;
   return new Fidelity((resolve, reject) => {
     const req = protocol.request(options, (response) => {
@@ -203,7 +211,7 @@ function put (options, data) {
 function del (options) {
   const protocol = selectProtocol(options);
   options = extract(options);
-  options = addDefaultHeaders(options);
+  options = addHeaders(options);
   options.method = 'DELETE';
   return new Fidelity((resolve, reject) => {
     const req = protocol.request(options, (response) => {
@@ -260,7 +268,7 @@ function exists (options) {
 function download (options, file) {
   const protocol = selectProtocol(options);
   options = extract(options);
-  options = addDefaultHeaders(options);
+  options = addHeaders(options);
   return new Fidelity((resolve, reject) => {
     const stream = fs.createWriteStream(file);
     const req = protocol.request(options, (response) => {
@@ -286,7 +294,7 @@ function upload (options, file) {
   const protocol = selectProtocol(options);
   options = extract(options);
   options.method = 'POST';
-  options = addDefaultHeaders(options);
+  options = addHeaders(options);
   options.headers.filename = file;
   return new Fidelity((resolve, reject) => {
     const req = protocol.request(options, (response) => {

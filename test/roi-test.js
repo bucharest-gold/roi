@@ -435,3 +435,27 @@ test('Should download and 404.', t => {
       t.fail();
     });
 });
+
+test('Should get with custom headers.', t => {
+  const server = createServer();
+  const opts = {
+    'endpoint': 'http://localhost:3000/posts',
+    'headers': {
+      'Accept': 'text/plain',
+      'Content-type': 'text/plain'
+    }
+  };
+
+  roi.get(opts)
+    .then(x => {
+      t.equal(x.statusCode, 200);
+      t.equal(x.headers['x-powered-by'], 'Express');
+      const result = JSON.parse(x.body);
+      t.equal(result[0].id, 1);
+      t.end();
+      server.close();
+    }).catch(e => {
+      console.error(e);
+      t.fail(e);
+    });
+});
