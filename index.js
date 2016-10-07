@@ -55,9 +55,10 @@ function selectProtocol (options) {
 }
 
 function extract (options) {
-  options.hostname = url.parse(options.endpoint).hostname;
-  options.port = url.parse(options.endpoint).port;
-  options.path = url.parse(options.endpoint).path;
+  const u = url.parse(options.endpoint);
+  options.hostname = u.hostname;
+  options.port = u.port;
+  options.path = u.path;
   return options;
 }
 

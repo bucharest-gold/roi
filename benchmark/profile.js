@@ -48,7 +48,7 @@ function runBenchmarks () {
   const profile = new Genet({
     profileName: 'roi',
     filter: /^(?!.*benchmark)(?=.*roi).*/,
-    duration: 1000,
+    duration: 10000,
     showAppOnly: true,
     verbose: true,
     flamegraph: true
@@ -71,7 +71,7 @@ function runBenchmarks () {
     num = num + 1;
   };
 
-  exports.time = 100;
+  exports.time = 1000;
   exports.countPerLap = 6;
   exports.compareCount = 8;
   profile.start();
