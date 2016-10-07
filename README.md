@@ -97,38 +97,50 @@ A basic and fast REST http-client library.
 
     roiGET
     Raw:
-    > 1.1398601398601398
-    > 1.1838161838161838
-    > 1.170829170829171
-    > 1.1808191808191808
-    Average (mean) 1.1688311688311688
+    > 6.479520479520479
+    > 6.335664335664336
+    > 5.76023976023976
+    > 6.3896103896103895
+    > 6.503496503496503
+    > 6.5994005994005995
+    > 6.497502497502498
+    > 6.791208791208791
+    Average (mean) 6.419580419580418
 
     requestGET
     Raw:
-    > 0.8211788211788211
-    > 0.8881118881118881
-    > 0.8911088911088911
-    > 0.8311688311688312
-    Average (mean) 0.857892107892108
+    > 4.675324675324675
+    > 4.957042957042957
+    > 5.070929070929071
+    > 4.658682634730539
+    > 5.142857142857143
+    > 4.903096903096903
+    > 4.886904761904762
+    > 4.819180819180819
+    Average (mean) 4.889252370633359
 
     requestPromiseGET
     Raw:
-    > 0.8731268731268731
-    > 0.7982017982017982
-    > 0.8792415169660679
-    > 0.8761238761238761
-    Average (mean) 0.8566735161046539
+    > 4.525474525474525
+    > 4.735264735264735
+    > 4.885114885114885
+    > 4.753246753246753
+    > 4.6453546453546455
+    > 4.75
+    > 4.820359281437126
+    > 4.987012987012987
+    Average (mean) 4.762728476613208
 
     Winner: roiGET
     Compared with next highest (requestGET), it's:
-    26.6% faster
-    1.36 times as fast
-    0.13 order(s) of magnitude faster
+    23.84% faster
+    1.31 times as fast
+    0.12 order(s) of magnitude faster
     A LITTLE FASTER
 
     Compared with the slowest (requestPromiseGET), it's:
-    26.71% faster
-    1.36 times as fast
+    25.81% faster
+    1.35 times as fast
     0.13 order(s) of magnitude faster
 
 ## Contributing
