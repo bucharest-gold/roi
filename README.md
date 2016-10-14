@@ -40,6 +40,7 @@ A basic and fast REST http-client library.
 
 ## More examples
 
+##### POST
     const options = {
       'endpoint': 'http://localhost:3000/posts'
     };
@@ -53,6 +54,7 @@ A basic and fast REST http-client library.
     .then(x => console.log(x))
     .catch(e => console.log(e));
 
+##### PUT
     const options = {
       'endpoint': 'http://localhost:3000/posts/2'
     };
@@ -66,6 +68,7 @@ A basic and fast REST http-client library.
     .then(x => console.log(x))
     .catch(e => console.log(e));
 
+##### DELETE
     const options = {
       'endpoint': 'http://localhost:3000/posts/3'
     };
@@ -74,6 +77,7 @@ A basic and fast REST http-client library.
     .then(x => console.log(x))
     .catch(e => console.log(e));
 
+##### EXISTS
     const options = {
       'endpoint': 'http://localhost:3000/posts/3'
     };
@@ -86,10 +90,35 @@ A basic and fast REST http-client library.
       'endpoint': 'http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar'
     };
 
+##### DOWNLOAD
     roi.download(opts, '/tmp/aesh.jar')
     .then(x => console.log(x))
     .catch(e => console.log(e));
 
+##### UPLOAD
+    // Fake server side app will save the file called uploaded.jar :
+    const up = (request, response) => {
+      request
+        .pipe(fs.createWriteStream('/tmp/uploaded.jar'))
+        .on('finish', () => {
+          response.end(request.headers.filename);
+        });
+    };
+    const server = require('http').createServer(up);
+    server.listen(3002, () => {});
+    
+    // Upload and check if the uploaded file exists:
+    const opts = {
+      'endpoint': 'http://localhost:3002/'
+    };
+    roi.upload(opts, '/tmp/aesh.jar')
+    .then(x => {
+      try {
+        fs.statSync('/tmp/uploaded.jar');
+      } catch (e) {
+        console.error(e);
+      }
+    });
 
 ## Benchmarks
 
