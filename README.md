@@ -86,11 +86,10 @@ A basic and fast REST http-client library.
     .then(x => console.log(x.statusCode === 200))
     .catch(e => console.log(e));
 
+##### DOWNLOAD
     const opts = {
       'endpoint': 'http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar'
     };
-
-##### DOWNLOAD
     roi.download(opts, '/tmp/aesh.jar')
     .then(x => console.log(x))
     .catch(e => console.log(e));
