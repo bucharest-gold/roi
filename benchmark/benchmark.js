@@ -5,6 +5,8 @@ const roi = require('../index.js');
 const jsonServer = require('json-server');
 const rp = require('request-promise');
 const request = require('request');
+const Wreck = require('wreck');
+const fetch = require('node-fetch');
 
 function createDb () {
   const db = {
@@ -60,6 +62,27 @@ function requestGET () {
   });
 }
 
+function wreckGET () {
+  return new Promise((resolve, reject) => {
+    Wreck.request('get', 'http://localhost:3000/posts', {}, (error, response) => {
+      if (error) {
+        return reject(error);
+      }
+      if (!response.body) {
+        return resolve(response.statusCode);
+      }
+      if (response.errorCode) {
+        return reject(response.message);
+      }
+      return resolve(response);
+    });
+  });
+}
+
+function fetchGET () {
+  return fetch('http://localhost:3000/posts');
+}
+
 function runBenchmarks () {
   const profile = new Genet({
     profileName: 'roi',
@@ -79,6 +102,12 @@ function runBenchmarks () {
     },
     'requestGET': function (done) {
       requestGET().then(done);
+    },
+    'wreckGET': function (done) {
+      wreckGET().then(done);
+    },
+    'fetchGET': function (done) {
+      fetchGET().then(done);
     }
   };
 
