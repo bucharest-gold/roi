@@ -16,6 +16,7 @@
 
 'use strict';
 
+const path = require('path');
 const test = require('tape');
 const http = require('http');
 const url = require('url');
@@ -457,5 +458,44 @@ test('Should get with custom headers.', t => {
     }).catch(e => {
       console.error(e);
       t.fail(e);
+    });
+});
+
+function createFileServer () {
+  const handler = (request, response) => {
+    request.on('data', (d) => {
+      console.log(`You posted: ${d}`);
+    });
+    response.statusCode = 200;
+    response.setHeader('Content-Type', 'application/octet-stream');
+    let buf = require('fs').readFileSync(path.join(__dirname, '/green.png'));
+    response.end(buf);
+  };
+  const s = http.createServer(handler);
+  s.listen(3003);
+  return s;
+}
+
+test('Should post and handle binary.', t => {
+  const server = createFileServer();
+  const opts = {
+    'endpoint': 'http://localhost:3003/',
+    'headers': {
+      'Accept': 'application/octet-stream',
+      'Content-type': 'application/octet-stream'
+    }
+  };
+
+  roi.postStream(opts, {foo: 1}, '/tmp/green.png')
+    .then(x => {
+      try {
+        fs.statSync('/tmp/green.png');
+        t.equal(1, 1);
+      } catch (e) {
+        console.error(e);
+        t.fail(e);
+      }
+      server.close();
+      t.end();
     });
 });

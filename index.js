@@ -26,7 +26,8 @@ module.exports = exports = {
   del: del,
   exists: exists,
   download: download,
-  upload: upload
+  upload: upload,
+  postStream: postStream
 };
 
 const Fidelity = require('fidelity');
@@ -322,5 +323,33 @@ function upload (options, file) {
     stream.on('close', (res) => {
       req.end();
     });
+  });
+}
+
+function postStream (options, data, file) {
+  data = data || {};
+  const protocol = selectProtocol(options);
+  options = extract(options);
+  options.method = 'POST';
+  const jsonData = JSON.stringify(data);
+  options.headers['Content-Length'] = jsonData.length;
+  return new Fidelity((resolve, reject) => {
+    const stream = fs.createWriteStream(file);
+    const req = protocol.request(options, (response) => {
+      if ((goodToGo(response) && !hasRedirect(response)) || notFound(response)) {
+        redirects = 0;
+        response.pipe(stream);
+        stream.on('finish', () => {
+          resolve(response);
+          stream.close();
+        });
+      } else {
+        validate(reject, response);
+        options.endpoint = response.headers.location;
+        resolve(postStream(options, file));
+      }
+    });
+    req.on('error', (e) => reject(e));
+    req.end();
   });
 }
