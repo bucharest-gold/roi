@@ -13,7 +13,7 @@ A basic and fast REST http-client library.
 | --------------- | ------------- |
 | License:        | Apache-2.0 |
 | Build:          | make |
-| Documentation:  | N/A |
+| Documentation:  | http://bucharest-gold.github.io/roi |
 | Issue tracker:  | https://github.com/bucharest-gold/roi/issues |
 | Engines:        | Node.js 4.x, 5.x, 6.x |
 
