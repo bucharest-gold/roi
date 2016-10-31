@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Index</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.simplex.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html">del</a></li><li><a href="global.html">download</a></li><li><a href="global.html">exists</a></li><li><a href="global.html">get</a></li><li><a href="global.html">post</a></li><li><a href="global.html">postStream</a></li><li><a href="global.html">put</a></li><li><a href="global.html">upload</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1>roi</h1><p><a href="https://coveralls.io/github/bucharest-gold/roi"><img src="https://coveralls.io/repos/github/bucharest-gold/roi/badge.svg" alt="Coverage Status"></a>
+<a href="https://travis-ci.org/bucharest-gold/roi"><img src="https://travis-ci.org/bucharest-gold/roi.svg?branch=master" alt="Build Status"></a>
+<a href="https://snyk.io/test/npm/roi"><img src="https://snyk.io/test/npm/roi/badge.svg" alt="Known Vulnerabilities"></a>
+<a href="https://david-dm.org/bucharest-gold/roi"><img src="https://david-dm.org/bucharest-gold/roi/status.svg" alt="dependencies Status"></a></p>
+<p><a href="https://npmjs.org/package/roi"><img src="https://nodei.co/npm/roi.png" alt="NPM"></a></p>
+<p>A basic and fast REST http-client library.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Project Info</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>License:</td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td>Build:</td>
+<td>make</td>
+</tr>
+<tr>
+<td>Documentation:</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>Issue tracker:</td>
+<td>https://github.com/bucharest-gold/roi/issues</td>
+</tr>
+<tr>
+<td>Engines:</td>
+<td>Node.js 4.x, 5.x, 6.x</td>
+</tr>
+</tbody>
+</table>
+<h2>Installation</h2><pre class="prettyprint source"><code>npm install roi -S</code></pre><h2>Usage</h2><pre class="prettyprint source"><code>const roi = require('roi');
+
+const options = {
+  'endpoint': 'http://localhost:3000/posts'
+};
+
+roi.get(options)
+.then(x => {
+   console.log(x);
+   console.log(x.statusCode);
+   console.log(x.headers);
+   console.log(x.body);
+ })
+.catch(e => console.log(e));</code></pre><h2>More examples</h2><h5>POST</h5><pre class="prettyprint source"><code>const options = {
+  'endpoint': 'http://localhost:3000/posts'
+};
+
+const foo = {
+  title: 'foo-json',
+  author: 'bgold'
+};
+
+roi.post(options, foo)
+.then(x => console.log(x))
+.catch(e => console.log(e));</code></pre><h5>PUT</h5><pre class="prettyprint source"><code>const options = {
+  'endpoint': 'http://localhost:3000/posts/2'
+};
+
+const foo = {
+  title: 'foo-json2',
+  author: 'bgold'
+};
+
+roi.put(options, foo)
+.then(x => console.log(x))
+.catch(e => console.log(e));</code></pre><h5>DELETE</h5><pre class="prettyprint source"><code>const options = {
+  'endpoint': 'http://localhost:3000/posts/3'
+};
+
+roi.del(options)
+.then(x => console.log(x))
+.catch(e => console.log(e));</code></pre><h5>EXISTS</h5><pre class="prettyprint source"><code>const options = {
+  'endpoint': 'http://localhost:3000/posts/3'
+};
+
+roi.exists(options)
+.then(x => console.log(x.statusCode === 200))
+.catch(e => console.log(e));</code></pre><h5>DOWNLOAD</h5><pre class="prettyprint source"><code>const opts = {
+  'endpoint': 'http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar'
+};
+roi.download(opts, '/tmp/aesh.jar')
+.then(x => console.log(x))
+.catch(e => console.log(e));</code></pre><h5>UPLOAD</h5><pre class="prettyprint source"><code>// Fake server side app will save the file called uploaded.jar :
+const up = (request, response) => {
+  request
+    .pipe(fs.createWriteStream('/tmp/uploaded.jar'))
+    .on('finish', () => {
+      response.end(request.headers.filename);
+    });
+};
+const server = require('http').createServer(up);
+server.listen(3002, () => {});
+
+// Upload and check if the uploaded file exists:
+const opts = {
+  'endpoint': 'http://localhost:3002/'
+};
+roi.upload(opts, '/tmp/aesh.jar')
+.then(x => {
+  try {
+    fs.statSync('/tmp/uploaded.jar');
+  } catch (e) {
+    console.error(e);
+  }
+});</code></pre><h2>Benchmarks</h2><pre class="prettyprint source"><code>Scores: (bigger is better)
+
+roiGET
+Raw:
+> 4.616766467065868
+> 5.160839160839161
+> 4.679282868525896
+> 1.9580838323353293
+> 5.245508982035928
+> 4.999000999000999
+> 5.274725274725275
+> 5.179640718562874
+Average (mean) 4.639231037886416
+
+wreckGET
+Raw:
+> 4.075924075924076
+> 5.057654075546719
+> 2.298507462686567
+> 5.136863136863137
+> 5.130869130869131
+> 5.136863136863137
+> 5.130869130869131
+> 5.1437125748503
+Average (mean) 4.638907840559025
+
+nodeGET
+Raw:
+> 4.338645418326693
+> 2.5774225774225776
+> 3.6430707876370887
+> 4.820359281437126
+> 5.364635364635364
+> 5.268731268731269
+> 5.25748502994012
+> 5.180458624127617
+Average (mean) 4.5563510440322315
+
+fetchGET
+Raw:
+> 2.979020979020979
+> 3.940119760479042
+> 3.976119402985075
+> 2.0119760479041915
+> 4.630109670987039
+> 4.544731610337972
+> 4.609390609390609
+> 4.807192807192807
+Average (mean) 3.937332611037214
+
+requestGET
+Raw:
+> 3.6706586826347305
+> 3.5244755244755246
+> 4.105894105894106
+> 2.793206793206793
+> 4.033966033966034
+> 3.956043956043956
+> 4.03996003996004
+> 3.754491017964072
+Average (mean) 3.734837019268157
+
+requestPromiseGET
+Raw:
+> 1.4177467597208375
+> 3.716283716283716
+> 3.633466135458167
+> 3.5209580838323356
+> 3.5964035964035963
+> 3.932067932067932
+> 3.6863136863136865
+> 3.89010989010989
+Average (mean) 3.4241687250237702
+
+Winner: roiGET
+Compared with next highest (wreckGET), it's:
+0.01% faster
+1 times as fast
+0 order(s) of magnitude faster
+BASICALLY THE SAME
+
+Compared with the slowest (requestPromiseGET), it's:
+26.19% faster
+1.35 times as fast
+0.13 order(s) of magnitude faster</code></pre><h2>Contributing</h2><p>Please read the <a href="./CONTRIBUTING.md">contributing guide</a></p></article>
+    </section>
+
+
+
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.2</a>
+	
+		on 2016-10-31T13:12:22-03:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : false,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
