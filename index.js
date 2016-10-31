@@ -16,9 +16,6 @@
 
 'use strict';
 
-/**
- * @module roi
- */
 module.exports = exports = {
   get: get,
   post: post,
@@ -116,6 +113,14 @@ function coolResponse (body, response) {
   return res;
 }
 
+/**
+* Performs a HTTP call with method GET.
+*
+* @instance
+* @function get
+* @param {string} options - The options object.
+* @returns {Promise} A promise that will resolve with the HTTP response.
+*/
 function get (options) {
   const protocol = selectProtocol(options);
   options = extract(options);
@@ -144,6 +149,15 @@ function get (options) {
   });
 }
 
+/**
+* Performs a HTTP call with method POST.
+*
+* @instance
+* @function post
+* @param {string} options - The options object.
+* @param {string} data - The POST data to be submitted.
+* @returns {Promise} A promise that will resolve with the HTTP response.
+*/
 function post (options, data) {
   data = data || {};
   const protocol = selectProtocol(options);
@@ -177,6 +191,15 @@ function post (options, data) {
   });
 }
 
+/**
+* Performs a HTTP call with method PUT.
+*
+* @instance
+* @function put
+* @param {string} options - The options object.
+* @param {string} data - The PUT data to be submitted.
+* @returns {Promise} A promise that will resolve with the HTTP response.
+*/
 function put (options, data) {
   data = data || {};
   const protocol = selectProtocol(options);
@@ -210,6 +233,14 @@ function put (options, data) {
   });
 }
 
+/**
+* Performs a HTTP call with method DELETE.
+*
+* @instance
+* @function del
+* @param {string} options - The options object.
+* @returns {Promise} A promise that will resolve with the HTTP response.
+*/
 function del (options) {
   const protocol = selectProtocol(options);
   options = extract(options);
@@ -239,6 +270,14 @@ function del (options) {
   });
 }
 
+/**
+* Performs a HTTP call with method HEAD to check if the endpoint exist.
+*
+* @instance
+* @function exists
+* @param {string} options - The options object.
+* @returns {Promise} A promise that will resolve with the HTTP response.
+*/
 function exists (options) {
   const protocol = selectProtocol(options);
   options = extract(options);
@@ -267,6 +306,15 @@ function exists (options) {
   });
 }
 
+/**
+* Performs a HTTP call with method GET to download a file.
+*
+* @instance
+* @function download
+* @param {string} options - The options object.
+* @param {string} file - The target filename of download.
+* @returns {Promise} A promise that will resolve with the HTTP response.
+*/
 function download (options, file) {
   const protocol = selectProtocol(options);
   options = extract(options);
@@ -292,6 +340,15 @@ function download (options, file) {
   });
 }
 
+/**
+* Performs a HTTP call with method POST to upload a file.
+*
+* @instance
+* @function upload
+* @param {string} options - The options object.
+* @param {string} file - The file to be uploaded.
+* @returns {Promise} A promise that will resolve with the HTTP response.
+*/
 function upload (options, file) {
   const protocol = selectProtocol(options);
   options = extract(options);
@@ -326,6 +383,17 @@ function upload (options, file) {
   });
 }
 
+/**
+* Performs a HTTP call with method POST and get the result as a download.
+* This feature is like `post` and `download` combined.
+*
+* @instance
+* @function postStream
+* @param {string} options - The options object.
+* @param {string} data - The POST data to be submitted.
+* @param {string} file - The target filename of download.
+* @returns {Promise} A promise that will resolve with the HTTP response.
+*/
 function postStream (options, data, file) {
   data = data || {};
   const protocol = selectProtocol(options);
