@@ -69,11 +69,7 @@ function auth (options) {
 
 function addHeaders (options) {
   if (options.headers) {
-    options.headers = {
-      'Accept': options.headers.Accept,
-      'Content-type': options.headers['Content-type'],
-      'Authorization': auth(options)
-    };
+    options.headers['Authorization'] = auth(options);
   } else {
     options.headers = {
       'Accept': 'application/json,text/plain',
