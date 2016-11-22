@@ -499,3 +499,55 @@ test('Should post and handle binary.', t => {
       t.end();
     });
 });
+
+function createCORSServer () {
+  const root = path.join(__dirname, '.', 'root');
+  const server = require('http-server').createServer({
+    root: root,
+    cors: true,
+    corsHeaders: 'X-Foo'
+  });
+  server.listen(3009);
+  return server;
+}
+
+test('Should get with CORS.', t => {
+  const server = createCORSServer();
+  const options1 = {
+    endpoint: 'http://127.0.0.1:3009/',
+    method: 'OPTIONS',
+    headers: {
+      'Access-Control-Request-Method': 'GET',
+      Origin: 'http://example.com',
+      'Access-Control-Request-Headers': 'X-Foo'
+    }
+  };
+  roi.get(options1)
+    .then(x => {
+      t.equal(x.headers['access-control-allow-methods'], 'GET,HEAD,POST');
+    }).catch(e => {
+      console.error(e);
+      server.close();
+      t.fail(e);
+    });
+
+  const options2 = {
+    endpoint: 'http://127.0.0.1:3009/',
+    method: 'OPTIONS',
+    headers: {
+      'Access-Control-Request-Method': 'GET',
+      Origin: 'http://example.com',
+      'Access-Control-Request-Headers': 'X-Bar'
+    }
+  };
+  roi.get(options2)
+    .then(x => {
+      t.equal(x.headers['access-control-allow-methods'], undefined);
+      server.close();
+      t.end();
+    }).catch(e => {
+      console.error(e);
+      server.close();
+      t.fail(e);
+    });
+});
