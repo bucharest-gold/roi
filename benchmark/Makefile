@@ -1,15 +1,18 @@
 bench: lint
 	./server-start.sh
-	eval time node benchmark1.js
+	node roi_node.js
 	./server-stop.sh
 	./server-start.sh
-	eval time node benchmark2.js
+	node roi_wreck.js
 	./server-stop.sh
 	./server-start.sh
-	eval time node benchmark3.js
+	node roi_request.js
 	./server-stop.sh
 	./server-start.sh
-	eval time node benchmark4.js
+	node roi_fetch.js
+	./server-stop.sh
+	./server-start.sh
+	node roi_request-promise.js
 	./server-stop.sh
 
 lint: node_modules
