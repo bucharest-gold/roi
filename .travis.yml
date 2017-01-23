@@ -4,6 +4,7 @@ language: node_js
 node_js:
   - "4"
   - "6"
+  - "7"
 before_script:
   - npm install -g coveralls
   - npm install -g szero
