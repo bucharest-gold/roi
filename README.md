@@ -23,6 +23,7 @@ A basic and fast REST http-client library.
 
 ## Usage
 
+```javascript
     const roi = require('roi');
 
     const options = {
@@ -37,10 +38,13 @@ A basic and fast REST http-client library.
        console.log(x.body);
      })
     .catch(e => console.log(e));
+```
 
 ## More examples
 
 ##### POST
+
+```javascript
     const options = {
       'endpoint': 'http://localhost:3000/posts'
     };
@@ -53,8 +57,11 @@ A basic and fast REST http-client library.
     roi.post(options, foo)
     .then(x => console.log(x))
     .catch(e => console.log(e));
+```
 
 ##### PUT
+
+```javascript
     const options = {
       'endpoint': 'http://localhost:3000/posts/2'
     };
@@ -67,8 +74,11 @@ A basic and fast REST http-client library.
     roi.put(options, foo)
     .then(x => console.log(x))
     .catch(e => console.log(e));
+```
 
 ##### DELETE
+
+```javascript
     const options = {
       'endpoint': 'http://localhost:3000/posts/3'
     };
@@ -76,8 +86,11 @@ A basic and fast REST http-client library.
     roi.del(options)
     .then(x => console.log(x))
     .catch(e => console.log(e));
+```
 
 ##### EXISTS
+
+```javascript
     const options = {
       'endpoint': 'http://localhost:3000/posts/3'
     };
@@ -85,16 +98,22 @@ A basic and fast REST http-client library.
     roi.exists(options)
     .then(x => console.log(x.statusCode === 200))
     .catch(e => console.log(e));
+```
 
 ##### DOWNLOAD
+
+```javascript
     const opts = {
       'endpoint': 'http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar'
     };
     roi.download(opts, '/tmp/aesh.jar')
     .then(x => console.log(x))
     .catch(e => console.log(e));
+```
 
 ##### UPLOAD
+
+```javascript
     // Fake server side app will save the file called uploaded.jar :
     const up = (request, response) => {
       request
@@ -118,6 +137,7 @@ A basic and fast REST http-client library.
         console.error(e);
       }
     });
+```
 
 ## Contributing
 
