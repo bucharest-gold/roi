@@ -139,6 +139,22 @@ A basic and fast REST http-client library.
     });
 ```
 
+##### Basic authentication
+
+```javascript
+    
+    // Just add the username and password:
+    const options = {
+      endpoint: 'http://localhost:3000/posts',
+      username: 'admin',
+      password: 'admin
+    };
+
+    roi.get(options)
+    .then(result => console.log(result))
+    .catch(e => console.log(e));
+```
+
 ## Contributing
 
 Please read the [contributing guide](./CONTRIBUTING.md)

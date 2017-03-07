@@ -23,6 +23,7 @@ const url = require('url');
 const fs = require('fs');
 const roi = require('../index');
 const jsonServer = require('json-server');
+const auth = require('http-auth');
 
 function createDb () {
   const db = {
@@ -95,6 +96,16 @@ function createRedirectServer () {
     }
   });
   return server.listen(3001, 'localhost');
+}
+
+function createAuthServer () {
+  const basic = auth.basic({ realm: 'Authenticated area.' },
+    (username, password, callback) => { callback(username === 'admin' && password === 'admin'); }
+  );
+  const server = http.createServer(basic, (request, response) => {
+    response.end(`${request.user} - logged.`);
+  });
+  return server.listen(3005, 'localhost');
 }
 
 test('Should get.', t => {
@@ -549,5 +560,46 @@ test('Should get with CORS.', t => {
       console.error(e);
       server.close();
       t.fail(e);
+    });
+});
+
+test('Should login', (t) => {
+  const server = createAuthServer();
+
+  const options = {
+    endpoint: 'http://localhost:3005',
+    username: 'admin',
+    password: 'admin'
+  };
+
+  roi.get(options)
+  .then(result => {
+    t.equal(result.body, 'admin - logged.');
+    server.close();
+    t.end();
+  }).catch(e => {
+    console.error(e);
+    server.close();
+    t.fail(e);
+  });
+});
+
+test('Should Unauthorized', (t) => {
+  const server = createAuthServer();
+
+  const options = {
+    endpoint: 'http://localhost:3005',
+    username: 'foo',
+    password: 'bar'
+  };
+
+  roi.get(options)
+    .then(result => {
+      t.fail('Should not have succeeded');
+    })
+    .catch(e => {
+      t.equal(e.toString(), '401 Unauthorized');
+      t.end();
+      server.close();
     });
 });
