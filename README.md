@@ -142,16 +142,14 @@ A basic and fast REST http-client library.
 ##### Basic authentication
 
 ```javascript
-    
-    // Just add the username and password:
-    const options = {
-      endpoint: 'http://localhost:3000/posts',
-      username: 'admin',
-      password: 'admin
+    // Add the username and password:
+    const opts = {
+      'endpoint': 'http://localhost:3000/',
+      'username': 'admin',
+      'password': 'admin'
     };
-
-    roi.get(options)
-    .then(result => console.log(result))
+    roi.get(opts)
+    .then(x => console.log(x))
     .catch(e => console.log(e));
 ```
 
