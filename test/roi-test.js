@@ -479,7 +479,7 @@ function createFileServer () {
     });
     response.statusCode = 200;
     response.setHeader('Content-Type', 'application/octet-stream');
-    let buf = require('fs').readFileSync(path.join(__dirname, '/green.png'));
+    const buf = require('fs').readFileSync(path.join(__dirname, '/green.png'));
     response.end(buf);
   };
   const s = http.createServer(handler);

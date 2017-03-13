@@ -62,7 +62,7 @@ function extract (options) {
 
 function auth (options) {
   if (options.username) {
-    return 'Basic ' + new Buffer(options.username + ':' + options.password).toString('base64');
+    return 'Basic ' + new Buffer(`${options.username}:${options.password}`).toString('base64');
   }
   return '';
 }
@@ -101,7 +101,7 @@ function validateGoodToGo (reject, response) {
 }
 
 function coolResponse (body, response) {
-  let res = {
+  const res = {
     'statusCode': response.statusCode,
     'headers': response.headers,
     'body': body

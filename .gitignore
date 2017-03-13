@@ -8,3 +8,4 @@ test/fixtures/db.json
 *.svg
 foo.html
 docs
+.nyc_output/

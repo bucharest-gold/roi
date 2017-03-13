@@ -11,7 +11,7 @@ function nodeGET () {
     const protocol = url.startsWith('https') ? require('https') : require('http');
     const request = protocol.get(url, (response) => {
       if (response.statusCode < 200 || response.statusCode > 299) {
-        reject(new Error('Failed to load, status code: ' + response.statusCode));
+        reject(new Error(`Failed to load, status code: ${response.statusCode}`));
       }
       const body = [];
       response.on('data', (chunk) => body.push(chunk));

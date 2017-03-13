@@ -3,7 +3,6 @@ test: lint
 
 ci: test
 	npm run dependencyCheck
-	npm run coverage
 	npm run docs
 
 lint: node_modules
