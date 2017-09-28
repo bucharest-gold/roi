@@ -11,7 +11,7 @@ before_script:
 script:
    - make ci
 notifications:
-  irc: "irc.freenode.org#brass-monkey"
+  irc: "irc.freenode.org#bucharest-gold"
 branches:
   only:
     - master
