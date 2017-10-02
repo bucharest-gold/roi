@@ -7,7 +7,7 @@
 
 [![NPM](https://nodei.co/npm/roi.png)](https://npmjs.org/package/roi)
 
-A basic and fast REST http-client library.
+A dependency-free http module.
 
 |                 | Project Info  |
 | --------------- | ------------- |
@@ -23,134 +23,118 @@ A basic and fast REST http-client library.
 
 ## Usage
 
-```javascript
-    const roi = require('roi');
+```js
+const roi = require('roi');
 
-    const options = {
-      'endpoint': 'http://localhost:3000/posts'
-    };
+const options = {endpoint: 'http://localhost:3000/posts'};
 
-    roi.get(options)
-    .then(x => {
-       console.log(x);
-       console.log(x.statusCode);
-       console.log(x.headers);
-       console.log(x.body);
-     })
-    .catch(e => console.log(e));
+roi.get(options)
+.then(response => {
+  console.log(response);
+  console.log(response.statusCode);
+  console.log(response.headers);
+  console.log(response.body);
+})
+.catch(e => console.log(e));
 ```
 
 ## More examples
 
 ##### POST
 
-```javascript
-    const options = {
-      'endpoint': 'http://localhost:3000/posts'
-    };
+```js
+const options = {endpoint: 'http://localhost:3000/posts'};
 
-    const foo = {
-      title: 'foo-json',
-      author: 'bgold'
-    };
+const foo = {
+  title: 'foo-json',
+  author: 'bgold'
+};
 
-    roi.post(options, foo)
-    .then(x => console.log(x))
-    .catch(e => console.log(e));
+roi.post(options, foo)
+.then(response => console.log(response)
+.catch(e => console.log(e));
 ```
 
 ##### PUT
 
-```javascript
-    const options = {
-      'endpoint': 'http://localhost:3000/posts/2'
-    };
+```js
+const options = {endpoint: 'http://localhost:3000/posts/2'};
 
-    const foo = {
-      title: 'foo-json2',
-      author: 'bgold'
-    };
+const foo = {
+  title: 'foo-json2',
+  author: 'bgold'
+};
 
-    roi.put(options, foo)
-    .then(x => console.log(x))
-    .catch(e => console.log(e));
+roi.put(options, foo)
+.then(response => console.log(response))
+.catch(e => console.log(e));
 ```
 
 ##### DELETE
 
-```javascript
-    const options = {
-      'endpoint': 'http://localhost:3000/posts/3'
-    };
+```js
+const options = {endpoint: 'http://localhost:3000/posts/3'};
 
-    roi.del(options)
-    .then(x => console.log(x))
-    .catch(e => console.log(e));
+roi.del(options)
+.then(response => console.log(response))
+.catch(e => console.log(e));
 ```
 
-##### EXISTS
+##### HEAD
 
-```javascript
-    const options = {
-      'endpoint': 'http://localhost:3000/posts/3'
-    };
+```js
+const options = {endpoint: 'http://localhost:3000/posts/3'};
 
-    roi.exists(options)
-    .then(x => console.log(x.statusCode === 200))
-    .catch(e => console.log(e));
+roi.head(options)
+.then(response => console.log(response.statusCode === 200))
+.catch(e => console.log(e));
 ```
 
 ##### DOWNLOAD
 
-```javascript
-    const opts = {
-      'endpoint': 'http://central.maven.org/maven2/org/jboss/aesh/aesh/0.66.8/aesh-0.66.8.jar'
-    };
-    roi.download(opts, '/tmp/aesh.jar')
-    .then(x => console.log(x))
-    .catch(e => console.log(e));
+```js
+const options = {endpoint: 'https://github.com/bucharest-gold/roi/raw/master/test/green.png'};
+roi.download(options, '/tmp/green.png')
+.then(x => console.log(x))
+.catch(e => console.log(e));
 ```
 
 ##### UPLOAD
 
-```javascript
-    // Fake server side app will save the file called uploaded.jar :
-    const up = (request, response) => {
-      request
-        .pipe(fs.createWriteStream('/tmp/uploaded.jar'))
-        .on('finish', () => {
-          response.end(request.headers.filename);
-        });
-    };
-    const server = require('http').createServer(up);
-    server.listen(3002, () => {});
-    
-    // Upload and check if the uploaded file exists:
-    const opts = {
-      'endpoint': 'http://localhost:3002/'
-    };
-    roi.upload(opts, '/tmp/aesh.jar')
-    .then(x => {
-      try {
-        fs.statSync('/tmp/uploaded.jar');
-      } catch (e) {
-        console.error(e);
-      }
+```js
+// Fake server side app will save the file called myFileUploaded.png :
+const up = (request, response) => {
+  request
+    .pipe(fs.createWriteStream('/tmp/myFileUploaded.png'))
+    .on('finish', () => {
+      response.end(request.headers.filename);
     });
+};
+const server = require('http').createServer(up);
+server.listen(3002, () => {});
+```
+
+```js
+// Upload and check if the uploaded file exists:
+const options = {endpoint: 'http://localhost:3002/'};
+roi.upload(options, '/tmp/myFile.png')
+.then(response => {
+  console.log(fs.existsSync('/tmp/myFileUploaded.png'));
+});
 ```
 
 ##### Basic authentication
 
-```javascript
-    // Add the username and password:
-    const opts = {
-      'endpoint': 'http://localhost:3000/',
-      'username': 'admin',
-      'password': 'admin'
-    };
-    roi.get(opts)
-    .then(x => console.log(x))
-    .catch(e => console.log(e));
+```js
+// Add the username and password:
+const options = {
+  endpoint: 'http://localhost:3000/',
+  username: 'admin',
+  password: 'admin'
+};
+roi.get(options)
+.then(response => console.log(response))
+.catch(e => console.log(e));
 ```
 
 ## Contributing
