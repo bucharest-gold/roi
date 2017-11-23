@@ -9,7 +9,7 @@ const { join } = require('path');
 test('UPLOAD.', t => {
   const up = (request, response) => {
     request
-      .pipe(fs.createWriteStream(join(os.tmpdir(),'readme-uploaded.md')))
+      .pipe(fs.createWriteStream(join(os.tmpdir(), 'readme-uploaded.md')))
       .on('finish', () => {
         response.end(request.headers.filename);
       });
