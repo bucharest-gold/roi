@@ -3,14 +3,17 @@
 const fs = require('fs');
 const test = require('tape');
 const roi = require('../lib/roi');
+const os = require('os');
+const { join } = require('path');
 
 const FakeServer = require('./fake-server');
 
 test('DOWNLOAD.', t => {
   const options = {endpoint: 'https://raw.githubusercontent.com/bucharest-gold/roi/master/README.md'};
-  roi.download(options, '/tmp/README.md')
+  const file = join(os.tmpdir(), 'README.md');
+  roi.download(options, file)
     .then(response => {
-      t.equal(fs.existsSync('/tmp/README.md'), true, 'File downloaded.');
+      t.equal(fs.existsSync(file), true, 'File downloaded.');
       t.equal(response.statusCode, 200);
       t.end();
     });
