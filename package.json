@@ -4,7 +4,7 @@
   "description": "A dependency-free http module.",
   "main": "lib/roi.js",
   "scripts": {
-    "test": "NODE_PENDING_DEPRECATION=1 nyc tape test/get-test.js test/post-test.js test/put-test.js test/delete-test.js test/head-test.js test/download-test.js test/upload-test.js | tap-spec",
+    "test": "cross-env NODE_PENDING_DEPRECATION=1 nyc tape test/get-test.js test/post-test.js test/put-test.js test/delete-test.js test/head-test.js test/download-test.js test/upload-test.js | tap-spec",
     "lint": "eslint test/*.js lib/*.js",
     "prepare": "nsp check",
     "coverage": "nyc report --reporter=text-lcov > ./coverage/lcov.info"
@@ -25,6 +25,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "corser": "^2.0.1",
+    "cross-env": "^5.1.1",
     "eslint": "^3.8.1",
     "eslint-config-semistandard": "^7.0.0",
     "eslint-config-standard": "^6.2.0",
