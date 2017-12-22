@@ -18,9 +18,8 @@ test('UPLOAD.', () => {
   const server = require('http').createServer(up);
   server.listen(3002, () => {});
 
-  const options = {endpoint: 'http://localhost:3002/'};
   const file = 'README.md';
-  return roi.upload(options, file)
+  return roi.upload('http://localhost:3002/', file)
     .then(response => {
       expect(fs.existsSync(join(os.tmpdir(), 'readme-uploaded.md'))).toBe(true);
       server.close();

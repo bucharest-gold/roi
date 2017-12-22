@@ -8,8 +8,7 @@ const FakeRedirectionServer = require('./fake-redirection-server');
 test('DELETE - Succeed to 404.', () => {
   expect.assertions(1);
   const server = FakeServer.create(6000);
-  const options = {endpoint: 'http://localhost:6000/foo.html'};
-  return roi.del(options)
+  return roi.del('http://localhost:6000/foo.html')
     .then(response => {
       expect(response.statusCode).toBe(404);
       server.close();
@@ -24,8 +23,7 @@ test('DELETE - Redirect and delete.', () => {
   expect.assertions(1);
   const redirectServer = FakeRedirectionServer.create();
   const server = FakeServer.create(3000);
-  const options = {endpoint: 'http://localhost:3001/01.html'};
-  return roi.del(options)
+  return roi.del('http://localhost:3001/01.html')
     .then(response => {
       expect(response.statusCode).toBe(200);
       redirectServer.close();

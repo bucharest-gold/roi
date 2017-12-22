@@ -10,8 +10,7 @@ const FakeCorsServer = require('./fake-cors-server');
 test('GET.', () => {
   expect.assertions(3);
   const server = FakeServer.create(5000);
-  const options = {endpoint: 'http://localhost:5000/posts'};
-  return roi.get(options)
+  return roi.get('http://localhost:5000/posts')
     .then(response => {
       expect(response.statusCode).toBe(200);
       expect(response.headers['x-powered-by']).toBe('Express');
@@ -27,8 +26,7 @@ test('GET.', () => {
 test('GET - Reach maximum redirects.', () => {
   expect.assertions(1);
   const server = FakeRedirectionServer.create();
-  const options = {endpoint: 'http://localhost:3001/01.html'};
-  return roi.get(options)
+  return roi.get('http://localhost:3001/01.html')
     .then(response => {
       console.log(response);
     })
@@ -74,8 +72,7 @@ test('GET - Reach maximum redirects.', () => {
 test('GET - Succeed to 404.', () => {
   expect.assertions(1);
   const server = FakeServer.create(5003);
-  const options = { endpoint: 'http://localhost:5003/foo.html' };
-  return roi.get(options)
+  return roi.get('http://localhost:5003/foo.html')
     .then(response => {
       expect(response.statusCode).toBe(404);
       server.close();
