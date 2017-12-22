@@ -1,5 +1,5 @@
 {
-  "extends": "semistandard",
+  "extends": ["semistandard","plugin:jest/recommended"],
   "rules": {
     "prefer-const": "error",
     "block-scoped-var": "error",

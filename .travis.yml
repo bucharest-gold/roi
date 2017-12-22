@@ -1,20 +1,14 @@
+language: node_js
 sudo: required
 dist: trusty
-language: node_js
 node_js:
-  - "6"
   - "8"
   - "9"
-before_script:
-  - npm install -g coveralls
-  - npm install -g szero
 script:
-   - make ci
-notifications:
-  irc: "irc.freenode.org#bucharest-gold"
+   - npm run lint
+   - npm test
 branches:
   only:
     - master
-after_success:
-  - rpm run coverage
-  - cat ./coverage/lcov.info | coveralls
+notifications:
+  irc: "irc.freenode.org#bucharest-gold"

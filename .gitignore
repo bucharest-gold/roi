@@ -3,7 +3,6 @@ coverage
 *.log
 test/fixtures/db.json
 .vscode
-*.cpuprofile
 *.txt
 *.svg
 foo.html
