@@ -19,7 +19,7 @@ test('UPLOAD.', () => {
   server.listen(3002, () => {});
 
   const options = {endpoint: 'http://localhost:3002/'};
-  const file = join(os.tmpdir(), 'README.md');
+  const file = 'README.md';
   return roi.upload(options, file)
     .then(response => {
       expect(fs.existsSync(join(os.tmpdir(), 'readme-uploaded.md'))).toBe(true);
