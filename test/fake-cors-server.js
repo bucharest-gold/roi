@@ -4,14 +4,14 @@ const path = require('path');
 
 class FakeCorsServer {
 
-  static create () {
+  static create (port) {
     const root = path.join(__dirname, '.', 'root');
     const server = require('http-server').createServer({
       root: root,
       cors: true,
       corsHeaders: 'X-Foo'
     });
-    server.listen(3009);
+    server.listen(port);
     return server;
   }
 }

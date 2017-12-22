@@ -4,7 +4,8 @@
   "description": "A dependency-free http module.",
   "main": "lib/roi.js",
   "scripts": {
-    "test": "cross-env NODE_PENDING_DEPRECATION=1 nyc tape test/get-test.js test/post-test.js test/put-test.js test/delete-test.js test/head-test.js test/download-test.js test/upload-test.js | tap-spec",
+    "test": "cross-env NODE_PENDING_DEPRECATION=1 jest --coverage",
+    "jest-w": "jest --watch",
     "lint": "eslint test/*.js lib/*.js",
     "prepare": "nsp check",
     "coverage": "nyc report --reporter=text-lcov > ./coverage/lcov.info"
@@ -29,17 +30,16 @@
     "eslint": "^3.8.1",
     "eslint-config-semistandard": "^7.0.0",
     "eslint-config-standard": "^6.2.0",
+    "eslint-plugin-jest": "^21.5.0",
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-react": "^6.4.1",
     "eslint-plugin-standard": "^2.0.1",
     "http-auth": "^3.1.1",
     "http-server": "^0.9.0",
-    "json-server": "0.8.14",
+    "jest": "^22.0.3",
+    "json-server": "0.12.1",
     "lodash": "^4.15.0",
-    "nsp": "^2.6.1",
-    "nyc": "^10.1.2",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.5.1"
+    "nsp": "^2.6.1"
   },
   "homepage": "https://github.com/bucharest-gold/roi#readme",
   "repository": {

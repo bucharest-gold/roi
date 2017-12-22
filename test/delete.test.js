@@ -1,38 +1,38 @@
 'use strict';
 
-const test = require('tape');
 const roi = require('../lib/roi');
 
 const FakeServer = require('./fake-server');
 const FakeRedirectionServer = require('./fake-redirection-server');
 
-test('DELETE - Succeed to 404.', t => {
-  const server = FakeServer.create();
-  const options = {endpoint: 'http://localhost:3000/foo.html'};
-  roi.del(options)
+test('DELETE - Succeed to 404.', () => {
+  expect.assertions(1);
+  const server = FakeServer.create(6000);
+  const options = {endpoint: 'http://localhost:6000/foo.html'};
+  return roi.del(options)
     .then(response => {
-      t.equal(response.statusCode, 404, 'Not found.');
-      t.end();
+      expect(response.statusCode).toBe(404);
       server.close();
     })
     .catch(e => {
       console.error(e);
-      t.fail();
+      server.close();
     });
 });
 
-test('DELETE - Redirect and delete.', t => {
+test('DELETE - Redirect and delete.', () => {
+  expect.assertions(1);
   const redirectServer = FakeRedirectionServer.create();
-  const server = FakeServer.create();
+  const server = FakeServer.create(3000);
   const options = {endpoint: 'http://localhost:3001/01.html'};
-  roi.del(options)
+  return roi.del(options)
     .then(response => {
-      t.equal(response.statusCode, 200, 'Deleted.');
-      t.end();
+      expect(response.statusCode).toBe(200);
       redirectServer.close();
       server.close();
     }).catch(e => {
       console.error(e);
-      t.fail(e);
+      server.close();
+      redirectServer.close();
     });
 });

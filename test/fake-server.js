@@ -31,12 +31,12 @@ class FakeServer {
     return db;
   }
 
-  static create () {
+  static create (port) {
     const server = jsonServer.create();
     const router = jsonServer.router(this.createDb());
     server.use(jsonServer.defaults());
     server.use(router);
-    const s = server.listen(3000);
+    const s = server.listen(port);
     return s;
   }
 }
