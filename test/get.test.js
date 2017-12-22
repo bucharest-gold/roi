@@ -38,38 +38,38 @@ test('GET - Reach maximum redirects.', () => {
     });
 });
 
-/*test('GET - Redirect and succeed.', () => {
-  expect.assertions(1);
-  const redirectServer = FakeRedirectionServer.create();
-  const server = FakeServer.create(5001);
-  const options = {endpoint: 'http://localhost:5001/05.html'};
-  return roi.get(options)
-    .then(response => {
-      expect(response.statusCode).toBe(200);
-      server.close();
-      redirectServer.close();
-    })
-    .catch(e => {
-      console.error(e);
-      redirectServer.close();
-    });
-});
+// test('GET - Redirect and succeed.', () => {
+//   expect.assertions(1);
+//   const redirectServer = FakeRedirectionServer.create();
+//   const server = FakeServer.create(5001);
+//   const options = {endpoint: 'http://localhost:5001/05.html'};
+//   return roi.get(options)
+//     .then(response => {
+//       expect(response.statusCode).toBe(200);
+//       server.close();
+//       redirectServer.close();
+//     })
+//     .catch(e => {
+//       console.error(e);
+//       redirectServer.close();
+//     });
+// });
 
-test('GET - Redirect and succeed to 404.', () => {
-  expect.assertions(1);
-  const redirectServer = FakeRedirectionServer.create();
-  const server = FakeServer.create(5002);
-  const options = {endpoint: 'http://localhost:5002/06.html'};
-  return roi.get(options)
-    .then(response => {
-      expect(response.statusCode).toBe(404);
-      server.close();
-      redirectServer.close();
-    })
-    .catch(e => {
-      console.error(e);
-    });
-});*/
+// test('GET - Redirect and succeed to 404.', () => {
+//   expect.assertions(1);
+//   const redirectServer = FakeRedirectionServer.create();
+//   const server = FakeServer.create(5002);
+//   const options = {endpoint: 'http://localhost:5002/06.html'};
+//   return roi.get(options)
+//     .then(response => {
+//       expect(response.statusCode).toBe(404);
+//       server.close();
+//       redirectServer.close();
+//     })
+//     .catch(e => {
+//       console.error(e);
+//     });
+// });
 
 test('GET - Succeed to 404.', () => {
   expect.assertions(1);
