@@ -7,9 +7,8 @@ const { join } = require('path');
 
 test('DOWNLOAD.', () => {
   expect.assertions(2);
-  const options = {endpoint: 'https://raw.githubusercontent.com/bucharest-gold/roi/master/README.md'};
   const file = join(os.tmpdir(), 'README.md');
-  return roi.download(options, file)
+  return roi.download('https://raw.githubusercontent.com/bucharest-gold/roi/master/README.md', file)
     .then(response => {
       expect(fs.existsSync(file)).toBe(true);
       expect(response.statusCode).toBe(200);

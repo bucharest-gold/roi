@@ -9,26 +9,18 @@
 
 A dependency-free http module.
 
-|                 | Project Info  |
-| --------------- | ------------- |
-| License:        | Apache-2.0 |
-| Build:          | make |
-| Documentation:  | http://bucharest-gold.github.io/roi |
-| Issue tracker:  | https://github.com/bucharest-gold/roi/issues |
-| Engines:        | Node.js 4.x, 6.x, 8.x |
-
 ## Installation
 
-    npm install roi -S
+```
+npm install roi -S
+```
 
 ## Usage
 
 ```js
 const roi = require('roi');
 
-const options = {endpoint: 'http://localhost:3000/posts'};
-
-roi.get(options)
+roi.get('http://localhost:3000/posts')
 .then(response => {
   console.log(response);
   console.log(response.statusCode);
@@ -43,14 +35,12 @@ roi.get(options)
 ##### POST
 
 ```js
-const options = {endpoint: 'http://localhost:3000/posts'};
-
 const foo = {
   title: 'foo-json',
   author: 'bgold'
 };
 
-roi.post(options, foo)
+roi.post('http://localhost:3000/posts', foo)
 .then(response => console.log(response)
 .catch(e => console.log(e));
 ```
@@ -58,14 +48,12 @@ roi.post(options, foo)
 ##### PUT
 
 ```js
-const options = {endpoint: 'http://localhost:3000/posts/2'};
-
 const foo = {
   title: 'foo-json2',
   author: 'bgold'
 };
 
-roi.put(options, foo)
+roi.put('http://localhost:3000/posts/2', foo)
 .then(response => console.log(response))
 .catch(e => console.log(e));
 ```
@@ -73,9 +61,7 @@ roi.put(options, foo)
 ##### DELETE
 
 ```js
-const options = {endpoint: 'http://localhost:3000/posts/3'};
-
-roi.del(options)
+roi.del('http://localhost:3000/posts/3')
 .then(response => console.log(response))
 .catch(e => console.log(e));
 ```
@@ -83,9 +69,7 @@ roi.del(options)
 ##### HEAD
 
 ```js
-const options = {endpoint: 'http://localhost:3000/posts/3'};
-
-roi.head(options)
+roi.head('http://localhost:3000/posts/3')
 .then(response => console.log(response.statusCode === 200))
 .catch(e => console.log(e));
 ```
@@ -93,8 +77,7 @@ roi.head(options)
 ##### DOWNLOAD
 
 ```js
-const options = {endpoint: 'https://github.com/bucharest-gold/roi/raw/master/test/green.png'};
-roi.download(options, '/tmp/green.png')
+roi.download('https://github.com/bucharest-gold/roi/raw/master/test/green.png', '/tmp/green.png')
 .then(x => console.log(x))
 .catch(e => console.log(e));
 ```
@@ -116,8 +99,7 @@ server.listen(3002, () => {});
 
 ```js
 // Upload and check if the uploaded file exists:
-const options = {endpoint: 'http://localhost:3002/'};
-roi.upload(options, '/tmp/myFile.png')
+roi.upload('http://localhost:3002/', '/tmp/myFile.png')
 .then(response => {
   console.log(fs.existsSync('/tmp/myFileUploaded.png'));
 });
