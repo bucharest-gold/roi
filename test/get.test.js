@@ -40,7 +40,7 @@ test('GET - Host not exist.', () => {
   expect.assertions(1);
   return roi.get('http://foobarfoo:9000/')
     .then(response => {
-      server.close();
+      console.log('this will not execute.');
     }).catch(e => {
       expect(e.toString()).toBe('Error: getaddrinfo ENOTFOUND foobarfoo foobarfoo:9000');
     });
