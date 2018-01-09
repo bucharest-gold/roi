@@ -36,6 +36,16 @@ test('GET - Reach maximum redirects.', () => {
     });
 });
 
+test('GET - Host not exist.', () => {
+  expect.assertions(1);
+  return roi.get('http://foobarfoo:9000/')
+    .then(response => {
+      server.close();
+    }).catch(e => {
+      expect(e.toString()).toBe('Error: getaddrinfo ENOTFOUND foobarfoo foobarfoo:9000');
+    });
+});
+
 // test('GET - Redirect and succeed.', () => {
 //   expect.assertions(1);
 //   const redirectServer = FakeRedirectionServer.create();
