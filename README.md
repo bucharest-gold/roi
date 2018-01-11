@@ -119,6 +119,23 @@ roi.get(options)
 .catch(e => console.log(e));
 ```
 
+##### Remove 'Authorization' header
+
+To avoid error like:
+
+`Request header field Authorization is not allowed by Access-Control-Allow-Headers.`
+
+```js
+const options = {
+  endpoint: 'http://localhost:3000/',
+  noAuth: true
+};
+roi.get(options)
+.then(response => console.log(response))
+.catch(e => console.log(e));
+```
+
+
 ## Contributing
 
 Please read the [contributing guide](./CONTRIBUTING.md)
